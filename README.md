@@ -34,7 +34,7 @@ detectable from partial traces — a formal consequence of the goroutine's state
 | Model | Training | Accuracy | GoUnblock |
 |-------|----------|----------|-----------|
 | Majority-class baseline | — | 35.5% | 0% |
-| Gemini 3.5 Flash zero-shot | — | 34.8% | 0% |
+| Gemini 3.5 Flash zero-shot | — | 35.8% | 0% |
 | Qwen2.5-Coder-7B zero-shot | — | 28.6% | 0% |
 | Qwen2.5-Coder-7B CE (Phase 13) | plain traces | 36.2% | 0% |
 | **Qwen2.5-Coder-7B Traj (Phase 16)** | **plain traces** | **40.1%** | **0%** |
