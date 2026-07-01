@@ -1,0 +1,110 @@
+{
+  "majority_baseline": {
+    "majority_class": "GoStart",
+    "majority_count": 283,
+    "total": 798,
+    "majority_baseline_acc": 0.35463659147869675,
+    "traj_acc": 0.40100250626566414,
+    "gap_pp": 0.04636591478696739,
+    "val_distribution": {
+      "GoStart": 283,
+      "GoCreate": 169,
+      "GoBlock": 209,
+      "GoSched": 56,
+      "GoUnblock": 48,
+      "GoEnd": 33
+    }
+  },
+  "training_frequency": {
+    "total_train_steps": 3400,
+    "by_event": {
+      "GoBlock": {
+        "train_count": 1486,
+        "train_pct": 43.70588235294118,
+        "val_count": 209,
+        "val_pct": 26.190476190476193,
+        "ratio": 1.6687700534759358
+      },
+      "GoCreate": {
+        "train_count": 38,
+        "train_pct": 1.1176470588235294,
+        "val_count": 169,
+        "val_pct": 21.17794486215539,
+        "ratio": 0.05277410372432997
+      },
+      "GoEnd": {
+        "train_count": 49,
+        "train_pct": 1.4411764705882353,
+        "val_count": 33,
+        "val_pct": 4.135338345864661,
+        "ratio": 0.34850267379679145
+      },
+      "GoSched": {
+        "train_count": 17,
+        "train_pct": 0.5,
+        "val_count": 56,
+        "val_pct": 7.017543859649122,
+        "ratio": 0.07125000000000001
+      },
+      "GoStart": {
+        "train_count": 1277,
+        "train_pct": 37.55882352941177,
+        "val_count": 283,
+        "val_pct": 35.46365914786968,
+        "ratio": 1.0590791935148618
+      },
+      "GoUnblock": {
+        "train_count": 533,
+        "train_pct": 15.676470588235295,
+        "val_count": 48,
+        "val_pct": 6.015037593984962,
+        "ratio": 2.606213235294118
+      }
+    }
+  },
+  "confusion_analysis": {
+    "gs_pred_gb": 133,
+    "gb_pred_gs": 65,
+    "total_confused": 198,
+    "prior_event_in_confusion": {
+      "GoBlock": 91,
+      "GoStart": 79,
+      "GoCreate": 15,
+      "GoSched": 5,
+      "GoEnd": 2,
+      "GoUnblock": 6
+    }
+  },
+  "mcnemar": {
+    "traj_vs_gemini": {
+      "acc_a": 0.40100250626566414,
+      "acc_b": 0.3583959899749373,
+      "diff_pp": 0.042606516290726815,
+      "mcnemar_pvalue": 0.06911799926866018,
+      "significant": false,
+      "ci_95": [
+        -0.0018434980457235476,
+        0.08771929824561403
+      ],
+      "b11": 138,
+      "b10": 182,
+      "b01": 148,
+      "b00": 330
+    },
+    "traj_vs_phase13": {
+      "acc_a": 0.40100250626566414,
+      "acc_b": 0.35463659147869675,
+      "diff_pp": 0.04636591478696739,
+      "mcnemar_pvalue": 0.015730410669211294,
+      "significant": true,
+      "ci_95": [
+        0.010025062656641603,
+        0.08270676691729323
+      ],
+      "b11": 190,
+      "b10": 130,
+      "b01": 93,
+      "b00": 385
+    }
+  }
+}

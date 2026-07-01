@@ -1,0 +1,4434 @@
+{
+  "model": "Qwen/Qwen3-8B",
+  "adapter": "/root/lora_adapter_traj",
+  "label": "fine-tuned",
+  "total_examples": 545,
+  "correct": 271,
+  "accuracy": 0.4972477064220184,
+  "elapsed_seconds": 1611.9461357593536,
+  "by_pattern": {
+    "mutex": {
+      "correct": 167,
+      "total": 347
+    },
+    "channel": {
+      "correct": 37,
+      "total": 80
+    },
+    "select": {
+      "correct": 60,
+      "total": 108
+    },
+    "fanout": {
+      "correct": 7,
+      "total": 10
+    }
+  },
+  "by_nondeterminism": {
+    "medium": {
+      "correct": 263,
+      "total": 535
+    },
+    "none": {
+      "correct": 8,
+      "total": 10
+    }
+  },
+  "confusion": {
+    "GoStart": {
+      "GoBlock": 68,
+      "parse_err": 6,
+      "GoStart": 136,
+      "GoSched": 1
+    },
+    "GoCreate": {
+      "GoBlock": 50,
+      "parse_err": 3,
+      "GoStart": 1,
+      "GoCreate": 2
+    },
+    "GoEnd": {
+      "GoStart": 14,
+      "GoBlock": 11
+    },
+    "GoBlock": {
+      "GoStart": 38,
+      "GoBlock": 129,
+      "parse_err": 7,
+      "GoSched": 2
+    },
+    "GoSched": {
+      "GoBlock": 31,
+      "GoStart": 7,
+      "parse_err": 4
+    },
+    "GoUnblock": {
+      "GoStart": 8,
+      "GoBlock": 21,
+      "parse_err": 2,
+      "GoUnblock": 4
+    }
+  },
+  "per_example": [
+    {
+      "index": 0,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 6}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 1\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 1,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 6}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 1\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 2,
+      "ground_truth": "{\"event_type\": \"GoCreate\", \"goroutine_id\": 11}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 7\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 3,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 11}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 1\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 4,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 23}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 19,\n  \"goroutines\": {\n    \"1\": {\n      \"status\": \"running\",\n      \"blocked_on\": null,\n      \"locals_hint\": \"unknown\"\n    },\n    \"19\":",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 5,
+      "ground_truth": "{\"event_type\": \"GoEnd\", \"goroutine_id\": 23}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 22\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 6,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 5}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 1\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 7,
+      "ground_truth": "{\"event_type\": \"GoEnd\", \"goroutine_id\": 7}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 1\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 8,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 5}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 1\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 9,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 7}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 6\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 10,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 25}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 25\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 11,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 25}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 24\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 12,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 40}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 37\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 13,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 40}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 39\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 14,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 4}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 1\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 15,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 9}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 1\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 16,
+      "ground_truth": "{\"event_type\": \"GoCreate\", \"goroutine_id\": 11}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 7\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 17,
+      "ground_truth": "{\"event_type\": \"GoSched\", \"goroutine_id\": 8}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 1\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 18,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 20}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 1\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 19,
+      "ground_truth": "{\"event_type\": \"GoEnd\", \"goroutine_id\": 24}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 22\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 20,
+      "ground_truth": "{\"event_type\": \"GoCreate\", \"goroutine_id\": 12}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 1\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 21,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 11}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 11\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 22,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 5}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 1\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 23,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 7}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 9\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 24,
+      "ground_truth": "{\"event_type\": \"GoCreate\", \"goroutine_id\": 7}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 5\n}",
+      "match": false,
+      "pattern": "channel",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 25,
+      "ground_truth": "{\"event_type\": \"GoSched\", \"goroutine_id\": 4}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 1\n}",
+      "match": false,
+      "pattern": "channel",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 26,
+      "ground_truth": "{\"event_type\": \"GoCreate\", \"goroutine_id\": 10}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 7\n}",
+      "match": false,
+      "pattern": "channel",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 27,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 8}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 10\n}",
+      "match": true,
+      "pattern": "channel",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 28,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 20}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 19\n}",
+      "match": false,
+      "pattern": "channel",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 29,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 19}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 20,\n  \"goroutines\": {\n    \"1\": {\n      \"status\": \"running\",\n      \"blocked_on\": null,\n      \"locals_hint\": \"unknown\"\n    },\n    \"19\":",
+      "match": false,
+      "pattern": "channel",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 30,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 7}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 7\n}",
+      "match": true,
+      "pattern": "channel",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 31,
+      "ground_truth": "{\"event_type\": \"GoSched\", \"goroutine_id\": 5}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 6\n}",
+      "match": false,
+      "pattern": "channel",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 32,
+      "ground_truth": "{\"event_type\": \"GoCreate\", \"goroutine_id\": 10}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 7\n}",
+      "match": false,
+      "pattern": "channel",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 33,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 7}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 8\n}",
+      "match": false,
+      "pattern": "channel",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 34,
+      "ground_truth": "{\"event_type\": \"GoSched\", \"goroutine_id\": 7}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 1\n}",
+      "match": false,
+      "pattern": "channel",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 35,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 10}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 10\n}",
+      "match": true,
+      "pattern": "channel",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 36,
+      "ground_truth": "{\"event_type\": \"GoSched\", \"goroutine_id\": 35}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 35\n}",
+      "match": false,
+      "pattern": "channel",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 37,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 35}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 37\n}",
+      "match": true,
+      "pattern": "channel",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 38,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 8}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 1,\n  \"goroutines\": {\n    \"1\": {\n      \"status\": \"blocked\",\n      \"blocked_on\": \"chan receive\",\n      \"locals_hint\": \"runtime.chanrecv2\"\n    },",
+      "match": false,
+      "pattern": "channel",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 39,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 7}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 1\n}",
+      "match": false,
+      "pattern": "channel",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 40,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 22}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 19\n}",
+      "match": false,
+      "pattern": "channel",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 41,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 22}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 1\n}",
+      "match": false,
+      "pattern": "channel",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 42,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 35}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 37\n}",
+      "match": true,
+      "pattern": "channel",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 43,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 37}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 36\n}",
+      "match": true,
+      "pattern": "channel",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 44,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 1}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 1\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 45,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 7}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 7\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 46,
+      "ground_truth": "{\"event_type\": \"GoEnd\", \"goroutine_id\": 11}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 11\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 47,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 7}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 8\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 48,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 23}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 23\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 49,
+      "ground_truth": "{\"event_type\": \"GoUnblock\", \"goroutine_id\": 21}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 20\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 50,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 1}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 1\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 51,
+      "ground_truth": "{\"event_type\": \"GoUnblock\", \"goroutine_id\": 1}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 38\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 52,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 4}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 5\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 53,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 7}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 6\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 54,
+      "ground_truth": "{\"event_type\": \"GoSched\", \"goroutine_id\": 19}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 19\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 55,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 19}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 19\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 56,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 37}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 38\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 57,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 37}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 37\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 58,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 21}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 19\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 59,
+      "ground_truth": "{\"event_type\": \"GoSched\", \"goroutine_id\": 20}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 1\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 60,
+      "ground_truth": "{\"event_type\": \"GoCreate\", \"goroutine_id\": 22}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 19,\n  \"goroutines\": {\n    \"1\": {\n      \"status\": \"running\",\n      \"blocked_on\": null,\n      \"locals_hint\": \"unknown\"\n    },\n    \"19\":",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 61,
+      "ground_truth": "{\"event_type\": \"GoSched\", \"goroutine_id\": 21}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 20,\n  \"goroutines\": {\n    \"1\": {\n      \"status\": \"running\",\n      \"blocked_on\": null,\n      \"locals_hint\": \"unknown\"\n    },\n    \"19\":",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 62,
+      "ground_truth": "{\"event_type\": \"GoCreate\", \"goroutine_id\": 10}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 7\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 63,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 8}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 1,\n  \"goroutines\": {\n    \"1\": {\n      \"status\": \"blocked\",\n      \"blocked_on\": \"sync\",\n      \"locals_hint\": \"sync.(*Mutex).Lock\"\n    },",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 64,
+      "ground_truth": "{\"event_type\": \"GoUnblock\", \"goroutine_id\": 36}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 34\n}",
+      "match": false,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 65,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 36}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 37\n}",
+      "match": true,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 66,
+      "ground_truth": "{\"event_type\": \"GoSched\", \"goroutine_id\": 20}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 22\n}",
+      "match": false,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 67,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 23}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 1\n}",
+      "match": false,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 68,
+      "ground_truth": "{\"event_type\": \"GoCreate\", \"goroutine_id\": 23}",
+      "prediction": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 19}",
+      "match": false,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 69,
+      "ground_truth": "{\"event_type\": \"GoSched\", \"goroutine_id\": 22}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 22\n}",
+      "match": false,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 70,
+      "ground_truth": "{\"event_type\": \"GoEnd\", \"goroutine_id\": 25}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 24\n}",
+      "match": false,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 71,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 23}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 23\n}",
+      "match": true,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 72,
+      "ground_truth": "{\"event_type\": \"GoCreate\", \"goroutine_id\": 22}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 1\n}",
+      "match": false,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 73,
+      "ground_truth": "{\"event_type\": \"GoSched\", \"goroutine_id\": 19}",
+      "prediction": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 19}",
+      "match": false,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 74,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 21}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 19\n}",
+      "match": true,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 75,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 22}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 19\n}",
+      "match": true,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 76,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 11}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 11\n}",
+      "match": true,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 77,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 11}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 11\n}",
+      "match": true,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 78,
+      "ground_truth": "{\"event_type\": \"GoCreate\", \"goroutine_id\": 23}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 1,\n  \"goroutines\": {\n    \"1\": {\n      \"status\": \"blocked\",\n      \"blocked_on\": \"chan receive\",\n      \"locals_hint\": \"runtime.chanrecv2\"\n    },",
+      "match": false,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 79,
+      "ground_truth": "{\"event_type\": \"GoSched\", \"goroutine_id\": 19}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 21\n}",
+      "match": false,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 80,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 21}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 1\n}",
+      "match": false,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 81,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 20}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 20\n}",
+      "match": true,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 82,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 10}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 10\n}",
+      "match": true,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 83,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 11}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 11\n}",
+      "match": true,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 84,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 4}",
+      "prediction": "{\n  \"event_type\": \"GoSched\",\n  \"goroutine_id\": 1\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 85,
+      "ground_truth": "{\"event_type\": \"GoEnd\", \"goroutine_id\": 8}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 1\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 86,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 35}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 35,\n  \"goroutines\": {\n    \"1\": {\n      \"status\": \"running\",\n      \"blocked_on\": null,\n      \"locals_hint\": \"unknown\"\n    },\n    \"35\":",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 87,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 38}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 37\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 88,
+      "ground_truth": "{\"event_type\": \"GoCreate\", \"goroutine_id\": 25}",
+      "prediction": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 21}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 89,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 22}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 22\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 90,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 9}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 10\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 91,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 10}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 11\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 92,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 22}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 24\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 93,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 25}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 25\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 94,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 19}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 23\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 95,
+      "ground_truth": "{\"event_type\": \"GoUnblock\", \"goroutine_id\": 21}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 22\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 96,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 21}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 22\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 97,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 23}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 23\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 98,
+      "ground_truth": "{\"event_type\": \"GoCreate\", \"goroutine_id\": 17}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 9\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 99,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 17}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 18\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 100,
+      "ground_truth": "{\"event_type\": \"GoEnd\", \"goroutine_id\": 39}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 39\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 101,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 40}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 19\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 102,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 24}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 21\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 103,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 21}",
+      "prediction": "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 104,
+      "ground_truth": "{\"event_type\": \"GoSched\", \"goroutine_id\": 23}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 22\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 105,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 22}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 22\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 106,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 21}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 19\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 107,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 21}",
+      "prediction": "{\n  \"event_type\": \"GoSched\",\n  \"goroutine_id\": 1\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 108,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 21}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 19\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 109,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 19}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 1\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 110,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 21}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 19\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 111,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 20}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 1\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 112,
+      "ground_truth": "{\"event_type\": \"GoSched\", \"goroutine_id\": 7}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 1\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 113,
+      "ground_truth": "{\"event_type\": \"GoSched\", \"goroutine_id\": 8}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 1\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 114,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 21}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 20\n}",
+      "match": true,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 115,
+      "ground_truth": "{\"event_type\": \"GoUnblock\", \"goroutine_id\": 22}",
+      "prediction": "{}",
+      "match": false,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 116,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 9}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 7\n}",
+      "match": false,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 117,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 8}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 8\n}",
+      "match": true,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 118,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 21}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 22\n}",
+      "match": false,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 119,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 22}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 22\n}",
+      "match": true,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 120,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 21}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 22\n}",
+      "match": false,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 121,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 23}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 23\n}",
+      "match": true,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 122,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 5}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 9\n}",
+      "match": true,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 123,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 8}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 8\n}",
+      "match": true,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 124,
+      "ground_truth": "{\"event_type\": \"GoCreate\", \"goroutine_id\": 10}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 9\n}",
+      "match": false,
+      "pattern": "channel",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 125,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 5}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 1\n}",
+      "match": true,
+      "pattern": "channel",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 126,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 21}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 21\n}",
+      "match": true,
+      "pattern": "channel",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 127,
+      "ground_truth": "{\"event_type\": \"GoCreate\", \"goroutine_id\": 34}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 22\n}",
+      "match": false,
+      "pattern": "channel",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 128,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 22}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 23\n}",
+      "match": true,
+      "pattern": "channel",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 129,
+      "ground_truth": "{\"event_type\": \"GoCreate\", \"goroutine_id\": 34}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 24\n}",
+      "match": false,
+      "pattern": "channel",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 130,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 21}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 22\n}",
+      "match": true,
+      "pattern": "channel",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 131,
+      "ground_truth": "{\"event_type\": \"GoEnd\", \"goroutine_id\": 22}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 33\n}",
+      "match": false,
+      "pattern": "channel",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 132,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 38}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 38\n}",
+      "match": true,
+      "pattern": "channel",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 133,
+      "ground_truth": "{\"event_type\": \"GoEnd\", \"goroutine_id\": 39}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 1\n}",
+      "match": false,
+      "pattern": "channel",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 134,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 21}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 23\n}",
+      "match": true,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 135,
+      "ground_truth": "{\"event_type\": \"GoEnd\", \"goroutine_id\": 22}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 20\n}",
+      "match": false,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 136,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 8}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 10\n}",
+      "match": true,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 137,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 9}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 11\n}",
+      "match": true,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 138,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 20}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 1\n}",
+      "match": true,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 139,
+      "ground_truth": "{\"event_type\": \"GoSched\", \"goroutine_id\": 19}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 23\n}",
+      "match": false,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 140,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 8}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 8\n}",
+      "match": true,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 141,
+      "ground_truth": "{\"event_type\": \"GoUnblock\", \"goroutine_id\": 12}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 10\n}",
+      "match": false,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 142,
+      "ground_truth": "{\"event_type\": \"GoSched\", \"goroutine_id\": 8}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 11\n}",
+      "match": false,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 143,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 9}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 10\n}",
+      "match": false,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 144,
+      "ground_truth": "{\"event_type\": \"GoSched\", \"goroutine_id\": 38}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 36,\n  \"goroutines\": {\n    \"1\": {\n      \"status\": \"running\",\n      \"blocked_on\": null,\n      \"locals_hint\": \"unknown\"\n    },\n    \"35\":",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 145,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 35}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 36\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 146,
+      "ground_truth": "{\"event_type\": \"GoSched\", \"goroutine_id\": 19}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 19,\n  \"goroutines\": {\n    \"1\": {\n      \"status\": \"running\",\n      \"blocked_on\": null,\n      \"locals_hint\": \"unknown\"\n    },\n    \"19\":",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 147,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 23}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 22\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 148,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 8}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 1\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 149,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 9}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 9\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 150,
+      "ground_truth": "{\"event_type\": \"GoCreate\", \"goroutine_id\": 25}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 21\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 151,
+      "ground_truth": "{\"event_type\": \"GoSched\", \"goroutine_id\": 24}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 22\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 152,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 22}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 1\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 153,
+      "ground_truth": "{\"event_type\": \"GoSched\", \"goroutine_id\": 22}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 1\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 154,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 37}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 37\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 155,
+      "ground_truth": "{\"event_type\": \"GoCreate\", \"goroutine_id\": 40}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 38\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 156,
+      "ground_truth": "{\"event_type\": \"GoUnblock\", \"goroutine_id\": 1}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 10\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 157,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 18}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 18\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 158,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 22}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 1\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 159,
+      "ground_truth": "{\"event_type\": \"GoUnblock\", \"goroutine_id\": 1}",
+      "prediction": "{\n  \"event_type\": \"GoUnblock\",\n  \"goroutine_id\": 1\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 160,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 24}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 22\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 161,
+      "ground_truth": "{\"event_type\": \"GoUnblock\", \"goroutine_id\": 1}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 22\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 162,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 23}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 22\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 163,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 22}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 1\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 164,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 23}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 22\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 165,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 22}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 1\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 166,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 8}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 8\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 167,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 10}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 1\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 168,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 21}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 1\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 169,
+      "ground_truth": "{\"event_type\": \"GoCreate\", \"goroutine_id\": 34}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 1\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 170,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 37}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 35\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 171,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 35}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 35\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 172,
+      "ground_truth": "{\"event_type\": \"GoCreate\", \"goroutine_id\": 33}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 1\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 173,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 21}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 35\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 174,
+      "ground_truth": "{\"event_type\": \"GoCreate\", \"goroutine_id\": 39}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 37\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 175,
+      "ground_truth": "{\"event_type\": \"GoUnblock\", \"goroutine_id\": 36}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 38\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 176,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 22}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 24\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 177,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 1}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 1\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 178,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 19}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 22\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 179,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 20}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 22\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 180,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 7}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 10\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 181,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 9}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 9\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 182,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 8}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 10\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 183,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 9}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 9\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 184,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 19}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 19,\n  \"goroutines\": {\n    \"1\": {\n      \"status\": \"running\",\n      \"blocked_on\": null,\n      \"locals_hint\": \"unknown\"\n    },\n    \"19\":",
+      "match": false,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 185,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 21}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 21\n}",
+      "match": true,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 186,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 37}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 38\n}",
+      "match": true,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 187,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 37}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 37\n}",
+      "match": true,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 188,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 19}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 1\n}",
+      "match": true,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 189,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 22}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 22\n}",
+      "match": true,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 190,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 20}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 1,\n  \"goroutines\": {\n    \"1\": {\n      \"status\": \"blocked\",\n      \"blocked_on\": \"select\",\n      \"locals_hint\": \"runtime.selectgo\"\n    },\n    \"1",
+      "match": false,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 191,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 21}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 22\n}",
+      "match": true,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 192,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 19}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 19\n}",
+      "match": true,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 193,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 21}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 21\n}",
+      "match": true,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 194,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 8}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 11\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 195,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 11}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 1\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 196,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 7}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 1\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 197,
+      "ground_truth": "{\"event_type\": \"GoUnblock\", \"goroutine_id\": 11}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 12\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 198,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 8}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 11\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 199,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 12}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 12\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 200,
+      "ground_truth": "{\"event_type\": \"GoCreate\", \"goroutine_id\": 24}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 19\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 201,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 21}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 23\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 202,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 11}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 10\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 203,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 9}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 1\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 204,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 6}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 1\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 205,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 4}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 6\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 206,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 7}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 7\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 207,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 6}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 1\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 208,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 6}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 6\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 209,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 6}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 6\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 210,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 10}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 10\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 211,
+      "ground_truth": "{\"event_type\": \"GoCreate\", \"goroutine_id\": 18}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 1\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 212,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 37}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 1,\n  \"goroutines\": {\n    \"1\": {\n      \"status\": \"blocked\",\n      \"blocked_on\": \"sync\",\n      \"locals_hint\": \"sync.(*Mutex).Lock\"\n    },",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 213,
+      "ground_truth": "{\"event_type\": \"GoSched\", \"goroutine_id\": 36}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 37,\n  \"goroutines\": {\n    \"1\": {\n      \"status\": \"running\",\n      \"blocked_on\": null,\n      \"locals_hint\": \"unknown\"\n    },\n    \"35\":",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 214,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 21}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 1\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 215,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 22}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 19\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 216,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 8}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 1\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 217,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 9}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 11\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 218,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 35}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 38\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 219,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 37}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 39\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 220,
+      "ground_truth": "{\"event_type\": \"GoSched\", \"goroutine_id\": 21}",
+      "prediction": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 1}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 221,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 22}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 25\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 222,
+      "ground_truth": "{\"event_type\": \"GoCreate\", \"goroutine_id\": 38}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 1,\n  \"goroutines\": {\n    \"1\": {\n      \"status\": \"blocked\",\n      \"blocked_on\": \"sync\",\n      \"locals_hint\": \"sync.(*Mutex).Lock\"\n    },",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 223,
+      "ground_truth": "{\"event_type\": \"GoCreate\", \"goroutine_id\": 9}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 1\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 224,
+      "ground_truth": "{\"event_type\": \"GoCreate\", \"goroutine_id\": 15}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 1\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 225,
+      "ground_truth": "{\"event_type\": \"GoEnd\", \"goroutine_id\": 38}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 37\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 226,
+      "ground_truth": "{\"event_type\": \"GoSched\", \"goroutine_id\": 36}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 1\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 227,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 37}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 38\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 228,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 37}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 37\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 229,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 7}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 10\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 230,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 10}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 10\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 231,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 8}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 10\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 232,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 10}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 10\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 233,
+      "ground_truth": "{\"event_type\": \"GoCreate\", \"goroutine_id\": 36}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 1\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 234,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 28}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 31\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 235,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 20}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 1\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 236,
+      "ground_truth": "{\"event_type\": \"GoEnd\", \"goroutine_id\": 25}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 21\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 237,
+      "ground_truth": "{\"event_type\": \"GoCreate\", \"goroutine_id\": 37}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 1\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 238,
+      "ground_truth": "{\"event_type\": \"GoEnd\", \"goroutine_id\": 27}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 31\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 239,
+      "ground_truth": "{\"event_type\": \"GoCreate\", \"goroutine_id\": 54}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 1\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 240,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 53}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 53\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 241,
+      "ground_truth": "{\"event_type\": \"GoCreate\", \"goroutine_id\": 34}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 1\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 242,
+      "ground_truth": "{\"event_type\": \"GoEnd\", \"goroutine_id\": 23}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 21\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 243,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 22}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 22\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 244,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 21}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 21\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 245,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 21}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 21\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 246,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 21}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 21\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 247,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 8}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 11\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 248,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 9}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 9\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 249,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 19}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 22\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 250,
+      "ground_truth": "{\"event_type\": \"GoCreate\", \"goroutine_id\": 33}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 22\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 251,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 22}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 22\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 252,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 21}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 21\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 253,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 20}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 1\n}",
+      "match": true,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 254,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 21}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 21\n}",
+      "match": true,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 255,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 8}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 8\n}",
+      "match": true,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 256,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 17}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 11\n}",
+      "match": true,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 257,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 10}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 10\n}",
+      "match": true,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 258,
+      "ground_truth": "{\"event_type\": \"GoEnd\", \"goroutine_id\": 10}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 11\n}",
+      "match": false,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 259,
+      "ground_truth": "{\"event_type\": \"GoUnblock\", \"goroutine_id\": 21}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 22\n}",
+      "match": false,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 260,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 20}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 21\n}",
+      "match": false,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 261,
+      "ground_truth": "{\"event_type\": \"GoCreate\", \"goroutine_id\": 11}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 1\n}",
+      "match": false,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 262,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 17}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 1\n}",
+      "match": false,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 263,
+      "ground_truth": "{\"event_type\": \"GoSched\", \"goroutine_id\": 36}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 38\n}",
+      "match": false,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 264,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 39}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 38\n}",
+      "match": false,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 265,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 38}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 35\n}",
+      "match": false,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 266,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 36}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 1\n}",
+      "match": true,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 267,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 21}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 19\n}",
+      "match": true,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 268,
+      "ground_truth": "{\"event_type\": \"GoSched\", \"goroutine_id\": 22}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 1\n}",
+      "match": false,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 269,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 9}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 9\n}",
+      "match": true,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 270,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 9}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 9\n}",
+      "match": true,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 271,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 4}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 9\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 272,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 6}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 6\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 273,
+      "ground_truth": "{\"event_type\": \"GoUnblock\", \"goroutine_id\": 1}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 24\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 274,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 21}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 21\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 275,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 1}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 1\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 276,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 24}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 23\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 277,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 11}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 1\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 278,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 9}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 9\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 279,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 37}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 38\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 280,
+      "ground_truth": "{\"event_type\": \"GoEnd\", \"goroutine_id\": 39}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 39\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 281,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 4}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 1\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 282,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 6}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 6\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 283,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 9}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 1\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 284,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 9}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 9\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 285,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 9}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 9\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 286,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 9}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 9\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 287,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 20}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 21\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 288,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 21}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 21\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 289,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 20}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 20\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 290,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 20}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 20\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 291,
+      "ground_truth": "{\"event_type\": \"GoEnd\", \"goroutine_id\": 22}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 22\n}",
+      "match": false,
+      "pattern": "channel",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 292,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 19}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 23\n}",
+      "match": false,
+      "pattern": "channel",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 293,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 20}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 22\n}",
+      "match": true,
+      "pattern": "channel",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 294,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 21}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 33\n}",
+      "match": true,
+      "pattern": "channel",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 295,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 19}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 22\n}",
+      "match": true,
+      "pattern": "channel",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 296,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 21}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 1\n}",
+      "match": false,
+      "pattern": "channel",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 297,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 21}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 22\n}",
+      "match": false,
+      "pattern": "channel",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 298,
+      "ground_truth": "{\"event_type\": \"GoCreate\", \"goroutine_id\": 33}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 22\n}",
+      "match": false,
+      "pattern": "channel",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 299,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 7}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 10\n}",
+      "match": false,
+      "pattern": "channel",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 300,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 10}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 10\n}",
+      "match": true,
+      "pattern": "channel",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 301,
+      "ground_truth": "{\"event_type\": \"GoCreate\", \"goroutine_id\": 24}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 22\n}",
+      "match": false,
+      "pattern": "channel",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 302,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 21}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 24\n}",
+      "match": true,
+      "pattern": "channel",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 303,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 19}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 22\n}",
+      "match": true,
+      "pattern": "channel",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 304,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 21}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 21\n}",
+      "match": true,
+      "pattern": "channel",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 305,
+      "ground_truth": "{\"event_type\": \"GoCreate\", \"goroutine_id\": 39}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 38\n}",
+      "match": false,
+      "pattern": "channel",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 306,
+      "ground_truth": "{\"event_type\": \"GoEnd\", \"goroutine_id\": 40}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 37\n}",
+      "match": false,
+      "pattern": "channel",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 307,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 36}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 38\n}",
+      "match": true,
+      "pattern": "channel",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 308,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 37}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 49\n}",
+      "match": true,
+      "pattern": "channel",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 309,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 35}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 38\n}",
+      "match": true,
+      "pattern": "channel",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 310,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 37}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 39\n}",
+      "match": true,
+      "pattern": "channel",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 311,
+      "ground_truth": "{\"event_type\": \"GoCreate\", \"goroutine_id\": 33}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 22\n}",
+      "match": false,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 312,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 19}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 21\n}",
+      "match": false,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 313,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 11}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 11\n}",
+      "match": true,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 314,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 9}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 9\n}",
+      "match": true,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 315,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 11}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 11\n}",
+      "match": true,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 316,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 9}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 9\n}",
+      "match": true,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 317,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 9}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 8\n}",
+      "match": true,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 318,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 9}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 9\n}",
+      "match": true,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 319,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 19}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 23\n}",
+      "match": true,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 320,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 21}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 21\n}",
+      "match": true,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 321,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 4}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 1\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 322,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 8}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 1\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 323,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 19}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 1\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 324,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 21}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 20\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 325,
+      "ground_truth": "{\"event_type\": \"GoCreate\", \"goroutine_id\": 33}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 1\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 326,
+      "ground_truth": "{\"event_type\": \"GoUnblock\", \"goroutine_id\": 33}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 24\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 327,
+      "ground_truth": "{\"event_type\": \"GoCreate\", \"goroutine_id\": 17}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 1\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 328,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 11}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 12\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 329,
+      "ground_truth": "{\"event_type\": \"GoCreate\", \"goroutine_id\": 33}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 1\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 330,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 24}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 23\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 331,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 8}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 7\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 332,
+      "ground_truth": "{\"event_type\": \"GoUnblock\", \"goroutine_id\": 6}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 7\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 333,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 21}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 23\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 334,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 22}",
+      "prediction": "{\"event_type\": \"GoStart\", \"goroutine_id\": 34}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 335,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 22}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 23\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 336,
+      "ground_truth": "{\"event_type\": \"GoUnblock\", \"goroutine_id\": 22}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 21\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 337,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 11}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 11\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 338,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 8}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 9\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 339,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 11}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 8\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 340,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 9}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 10\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 341,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 6}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 7\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 342,
+      "ground_truth": "{\"event_type\": \"GoUnblock\", \"goroutine_id\": 6}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 1\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 343,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 22}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 22\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 344,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 21}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 21\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 345,
+      "ground_truth": "{\"event_type\": \"GoUnblock\", \"goroutine_id\": 1}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 38\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 346,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 37}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 1\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 347,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 1}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 1\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 348,
+      "ground_truth": "{\"event_type\": \"GoSched\", \"goroutine_id\": 6}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 19\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 349,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 6}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 8\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 350,
+      "ground_truth": "{\"event_type\": \"GoUnblock\", \"goroutine_id\": 1}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 8\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 351,
+      "ground_truth": "{\"event_type\": \"GoSched\", \"goroutine_id\": 21}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 19\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 352,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 20}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 21\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 353,
+      "ground_truth": "{\"event_type\": \"GoSched\", \"goroutine_id\": 37}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 36\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 354,
+      "ground_truth": "{\"event_type\": \"GoCreate\", \"goroutine_id\": 19}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 37\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 355,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 22}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 1\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 356,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 21}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 21\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 357,
+      "ground_truth": "{\"event_type\": \"GoSched\", \"goroutine_id\": 21}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 1\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 358,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 33}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 20\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 359,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 6}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 4\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 360,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 1}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 1\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 361,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 8}",
+      "prediction": "{\"event_type\": \"GoStart\", \"goroutine_id\": 7}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 362,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 6}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 4\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 363,
+      "ground_truth": "{\"event_type\": \"GoCreate\", \"goroutine_id\": 11}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 1\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 364,
+      "ground_truth": "{\"event_type\": \"GoEnd\", \"goroutine_id\": 11}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 10\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 365,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 6}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 8\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 366,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 5}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 5\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 367,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 21}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 21\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 368,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 20}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 21\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 369,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 39}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 39\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 370,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 40}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 38\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 371,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 21}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 1\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 372,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 23}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 25\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 373,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 7}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 1\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 374,
+      "ground_truth": "{\"event_type\": \"GoEnd\", \"goroutine_id\": 11}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 1\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 375,
+      "ground_truth": "{\"event_type\": \"GoCreate\", \"goroutine_id\": 40}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 35\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 376,
+      "ground_truth": "{\"event_type\": \"GoSched\", \"goroutine_id\": 38}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 36\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 377,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 8}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 1\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 378,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 10}",
+      "prediction": "{\n  \"event_type\": \"GoSched\",\n  \"goroutine_id\": 1\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 379,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 21}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 19\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 380,
+      "ground_truth": "{\"event_type\": \"GoSched\", \"goroutine_id\": 19}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 21\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 381,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 35}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 35\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 382,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 36}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 36\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 383,
+      "ground_truth": "{\"event_type\": \"GoCreate\", \"goroutine_id\": 22}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 19\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 384,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 22}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 22\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 385,
+      "ground_truth": "{\"event_type\": \"GoCreate\", \"goroutine_id\": 22}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 19\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 386,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 21}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 20\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 387,
+      "ground_truth": "{\"event_type\": \"GoCreate\", \"goroutine_id\": 39}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 37\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 388,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 37}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 37\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 389,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 19}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 19\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 390,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 22}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 22\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 391,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 7}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 1\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 392,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 10}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 10\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 393,
+      "ground_truth": "{\"event_type\": \"GoCreate\", \"goroutine_id\": 23}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 19\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 394,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 22}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 22\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 395,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 7}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 1\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 396,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 11}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 10\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 397,
+      "ground_truth": "{\"event_type\": \"GoSched\", \"goroutine_id\": 22}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 23\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 398,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 27}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 23\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 399,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 21}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 22\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 400,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 24}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 21\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 401,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 35}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 36\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 402,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 37}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 36\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 403,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 40}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 1\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 404,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 37}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 36\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 405,
+      "ground_truth": "{\"event_type\": \"GoSched\", \"goroutine_id\": 19}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 21\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 406,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 21}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 21\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 407,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 22}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 23\n}",
+      "match": false,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 408,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 1}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 19\n}",
+      "match": false,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 409,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 7}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 9\n}",
+      "match": true,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 410,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 9}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 9\n}",
+      "match": true,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 411,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 19}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 19,\n  \"goroutines\": {\n    \"1\": {\n      \"status\": \"running\",\n      \"blocked_on\": null,\n      \"locals_hint\": \"unknown\"\n    },\n    \"19\":",
+      "match": false,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 412,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 20}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 20\n}",
+      "match": true,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 413,
+      "ground_truth": "{\"event_type\": \"GoSched\", \"goroutine_id\": 37}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 36\n}",
+      "match": false,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 414,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 37}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 38\n}",
+      "match": true,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 415,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 37}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 38\n}",
+      "match": false,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 416,
+      "ground_truth": "{\"event_type\": \"GoUnblock\", \"goroutine_id\": 37}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 39\n}",
+      "match": false,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 417,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 36}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 38\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 418,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 1}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 1\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 419,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 23}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 23\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 420,
+      "ground_truth": "{\"event_type\": \"GoUnblock\", \"goroutine_id\": 1}",
+      "prediction": "{\"event_type\": \"GoUnblock\", \"goroutine_id\": 1}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 421,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 8}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 11\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 422,
+      "ground_truth": "{\"event_type\": \"GoUnblock\", \"goroutine_id\": 1}",
+      "prediction": "{\"event_type\": \"GoUnblock\", \"goroutine_id\": 1}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 423,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 21}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 22\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 424,
+      "ground_truth": "{\"event_type\": \"GoUnblock\", \"goroutine_id\": 1}",
+      "prediction": "{}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 425,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 36}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 36\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 426,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 1}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 1\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 427,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 7}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 4\n}",
+      "match": false,
+      "pattern": "channel",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 428,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 6}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 6\n}",
+      "match": true,
+      "pattern": "channel",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 429,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 8}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 11\n}",
+      "match": false,
+      "pattern": "channel",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 430,
+      "ground_truth": "{\"event_type\": \"GoUnblock\", \"goroutine_id\": 1}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 9\n}",
+      "match": false,
+      "pattern": "channel",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 431,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 21}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 22\n}",
+      "match": true,
+      "pattern": "channel",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 432,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 21}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 21\n}",
+      "match": true,
+      "pattern": "channel",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 433,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 10}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 9\n}",
+      "match": false,
+      "pattern": "channel",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 434,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 9}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 9\n}",
+      "match": true,
+      "pattern": "channel",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 435,
+      "ground_truth": "{\"event_type\": \"GoEnd\", \"goroutine_id\": 10}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 11\n}",
+      "match": false,
+      "pattern": "channel",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 436,
+      "ground_truth": "{\"event_type\": \"GoUnblock\", \"goroutine_id\": 9}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 11\n}",
+      "match": false,
+      "pattern": "channel",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 437,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 24}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 23\n}",
+      "match": true,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 438,
+      "ground_truth": "{\"event_type\": \"GoEnd\", \"goroutine_id\": 22}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 1\n}",
+      "match": false,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 439,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 22}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 22\n}",
+      "match": true,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 440,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 22}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 24\n}",
+      "match": false,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 441,
+      "ground_truth": "{\"event_type\": \"GoCreate\", \"goroutine_id\": 12}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 10\n}",
+      "match": false,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 442,
+      "ground_truth": "{\"event_type\": \"GoUnblock\", \"goroutine_id\": 10}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 11\n}",
+      "match": false,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 443,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 26}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 25\n}",
+      "match": true,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 444,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 23}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 23\n}",
+      "match": true,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 445,
+      "ground_truth": "{\"event_type\": \"GoCreate\", \"goroutine_id\": 40}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 38\n}",
+      "match": false,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 446,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 37}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 37\n}",
+      "match": true,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 447,
+      "ground_truth": "{\"event_type\": \"GoUnblock\", \"goroutine_id\": 1}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 7\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 448,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 6}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 6\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 449,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 9}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 10\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 450,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 10}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 10\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 451,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 7}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 10\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 452,
+      "ground_truth": "{\"event_type\": \"GoUnblock\", \"goroutine_id\": 1}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 10\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 453,
+      "ground_truth": "{\"event_type\": \"GoEnd\", \"goroutine_id\": 24}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 24\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 454,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 22}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 1\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 455,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 36}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 38\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 456,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 38}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 38\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 457,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 23}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 21\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 458,
+      "ground_truth": "{\"event_type\": \"GoEnd\", \"goroutine_id\": 23}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 1\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 459,
+      "ground_truth": "{\"event_type\": \"GoUnblock\", \"goroutine_id\": 1}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 8\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 460,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 8}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 1\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 461,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 23}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 23\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 462,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 1}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 1\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 463,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 11}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 10\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 464,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 1}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 10\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 465,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 21}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 24\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 466,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 23}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 23\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 467,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 20}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 21\n}",
+      "match": true,
+      "pattern": "channel",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 468,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 21}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 1\n}",
+      "match": false,
+      "pattern": "channel",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 469,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 7}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 9\n}",
+      "match": false,
+      "pattern": "channel",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 470,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 9}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 9\n}",
+      "match": true,
+      "pattern": "channel",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 471,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 35}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 35\n}",
+      "match": true,
+      "pattern": "channel",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 472,
+      "ground_truth": "{\"event_type\": \"GoCreate\", \"goroutine_id\": 19}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 38\n}",
+      "match": false,
+      "pattern": "channel",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 473,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 9}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 1\n}",
+      "match": false,
+      "pattern": "channel",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 474,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 8}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 9\n}",
+      "match": false,
+      "pattern": "channel",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 475,
+      "ground_truth": "{\"event_type\": \"GoSched\", \"goroutine_id\": 21}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 19\n}",
+      "match": false,
+      "pattern": "channel",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 476,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 22}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 21\n}",
+      "match": false,
+      "pattern": "channel",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 477,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 26}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 26\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 478,
+      "ground_truth": "{\"event_type\": \"GoUnblock\", \"goroutine_id\": 26}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 25\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 479,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 21}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 22\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 480,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 21}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 22\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 481,
+      "ground_truth": "{\"event_type\": \"GoSched\", \"goroutine_id\": 23}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 21\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 482,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 22}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 22\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 483,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 37}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 1\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 484,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 36}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 38\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 485,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 8}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 7\n}",
+      "match": false,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 486,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 6}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 1\n}",
+      "match": true,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 487,
+      "ground_truth": "{\"event_type\": \"GoSched\", \"goroutine_id\": 20}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 1\n}",
+      "match": false,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 488,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 21}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 22\n}",
+      "match": true,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 489,
+      "ground_truth": "{\"event_type\": \"GoCreate\", \"goroutine_id\": 11}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 1\n}",
+      "match": false,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 490,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 9}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 10\n}",
+      "match": true,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 491,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 24}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 24\n}",
+      "match": true,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 492,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 22}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 22\n}",
+      "match": true,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 493,
+      "ground_truth": "{\"event_type\": \"GoSched\", \"goroutine_id\": 22}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 1\n}",
+      "match": false,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 494,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 21}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 1\n}",
+      "match": true,
+      "pattern": "select",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 495,
+      "ground_truth": "{\"event_type\": \"GoSched\", \"goroutine_id\": 20}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 19\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 496,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 19}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 19\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 497,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 8}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 1,\n  \"goroutines\": {\n    \"1\": {\n      \"status\": \"blocked\",\n      \"blocked_on\": \"sync\",\n      \"locals_hint\": \"sync.(*Mutex).Lock\"\n    },",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 498,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 7}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 10\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 499,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 22}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 19\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 500,
+      "ground_truth": "{\"event_type\": \"GoSched\", \"goroutine_id\": 19}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 22\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 501,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 21}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 21\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 502,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 22}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 22\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 503,
+      "ground_truth": "{\"event_type\": \"GoCreate\", \"goroutine_id\": 22}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 19\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 504,
+      "ground_truth": "{\"event_type\": \"GoSched\", \"goroutine_id\": 19}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 19\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 505,
+      "ground_truth": "{\"event_type\": \"GoCreate\", \"goroutine_id\": 33}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 1\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 506,
+      "ground_truth": "{\"event_type\": \"GoUnblock\", \"goroutine_id\": 1}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 34\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 507,
+      "ground_truth": "{\"event_type\": \"GoCreate\", \"goroutine_id\": 17}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 1\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 508,
+      "ground_truth": "{\"event_type\": \"GoUnblock\", \"goroutine_id\": 1}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 18\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 509,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 21}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 21\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 510,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 34}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 1\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 511,
+      "ground_truth": "{\"event_type\": \"GoCreate\", \"goroutine_id\": 17}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 1\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 512,
+      "ground_truth": "{\"event_type\": \"GoUnblock\", \"goroutine_id\": 1}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 18\n}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 513,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 33}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 33\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 514,
+      "ground_truth": "{\"event_type\": \"GoUnblock\", \"goroutine_id\": 1}",
+      "prediction": "{\n  \"event_type\": \"GoUnblock\",\n  \"goroutine_id\": 33\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 515,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 22}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 22\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 516,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 21}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 21\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 517,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 38}",
+      "prediction": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 35}",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 518,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 37}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 37\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 519,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 21}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 22\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 520,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 21}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 21\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 521,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 21}",
+      "prediction": "{\n  \"event_type\": \"GoUnblock\",\n  \"goroutine_id\": 1,\n  \"goroutines\": {\n    \"1\": {\n      \"status\": \"runnable\",\n      \"blocked_on\": null,\n      \"locals_hint\": \"runtime.chanrecv2\"\n    },",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 522,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 21}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 21\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 523,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 35}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 38,\n  \"goroutines\": {\n    \"1\": {\n      \"status\": \"blocked\",\n      \"blocked_on\": \"chan send\",\n      \"locals_hint\": \"runtime.chansend1\"",
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 524,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 37}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 37\n}",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 525,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 9}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 9\n}",
+      "match": true,
+      "pattern": "fanout",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 526,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 1}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 13\n}",
+      "match": true,
+      "pattern": "fanout",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 527,
+      "ground_truth": "{\"event_type\": \"GoCreate\", \"goroutine_id\": 25}",
+      "prediction": "{\n  \"event_type\": \"GoCreate\",\n  \"goroutine_id\": 25\n}",
+      "match": true,
+      "pattern": "fanout",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 528,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 27}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 1\n}",
+      "match": true,
+      "pattern": "fanout",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 529,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 25}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 24\n}",
+      "match": true,
+      "pattern": "fanout",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 530,
+      "ground_truth": "{\"event_type\": \"GoUnblock\", \"goroutine_id\": 25}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 22\n}",
+      "match": false,
+      "pattern": "fanout",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 531,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 9}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 10\n}",
+      "match": false,
+      "pattern": "fanout",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 532,
+      "ground_truth": "{\"event_type\": \"GoEnd\", \"goroutine_id\": 11}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 10\n}",
+      "match": false,
+      "pattern": "fanout",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 533,
+      "ground_truth": "{\"event_type\": \"GoCreate\", \"goroutine_id\": 22}",
+      "prediction": "{\n  \"event_type\": \"GoCreate\",\n  \"goroutine_id\": 22\n}",
+      "match": true,
+      "pattern": "fanout",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 534,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 24}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 24\n}",
+      "match": true,
+      "pattern": "fanout",
+      "nondeterminism": "medium"
+    },
+    {
+      "index": 535,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 21}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 21\n}",
+      "match": true,
+      "pattern": "channel",
+      "nondeterminism": "none"
+    },
+    {
+      "index": 536,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 22}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 22\n}",
+      "match": true,
+      "pattern": "channel",
+      "nondeterminism": "none"
+    },
+    {
+      "index": 537,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 24}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 24\n}",
+      "match": true,
+      "pattern": "channel",
+      "nondeterminism": "none"
+    },
+    {
+      "index": 538,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 23}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 23\n}",
+      "match": true,
+      "pattern": "channel",
+      "nondeterminism": "none"
+    },
+    {
+      "index": 539,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 1}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 23\n}",
+      "match": false,
+      "pattern": "channel",
+      "nondeterminism": "none"
+    },
+    {
+      "index": 540,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 23}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 23\n}",
+      "match": true,
+      "pattern": "channel",
+      "nondeterminism": "none"
+    },
+    {
+      "index": 541,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 21}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 22\n}",
+      "match": false,
+      "pattern": "channel",
+      "nondeterminism": "none"
+    },
+    {
+      "index": 542,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 22}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 22\n}",
+      "match": true,
+      "pattern": "channel",
+      "nondeterminism": "none"
+    },
+    {
+      "index": 543,
+      "ground_truth": "{\"event_type\": \"GoStart\", \"goroutine_id\": 21}",
+      "prediction": "{\n  \"event_type\": \"GoStart\",\n  \"goroutine_id\": 21\n}",
+      "match": true,
+      "pattern": "channel",
+      "nondeterminism": "none"
+    },
+    {
+      "index": 544,
+      "ground_truth": "{\"event_type\": \"GoBlock\", \"goroutine_id\": 22}",
+      "prediction": "{\n  \"event_type\": \"GoBlock\",\n  \"goroutine_id\": 22\n}",
+      "match": true,
+      "pattern": "channel",
+      "nondeterminism": "none"
+    }
+  ]
+}

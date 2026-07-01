@@ -1,0 +1,76 @@
+{
+  "model": "gemini-3.5-flash",
+  "thinking_budget": 0,
+  "total": 5,
+  "correct": 3,
+  "accuracy": 0.6,
+  "errors": 0,
+  "elapsed_seconds": 18.443249225616455,
+  "by_pattern": {
+    "channel": {
+      "correct": 0,
+      "total": 1
+    },
+    "mutex": {
+      "correct": 2,
+      "total": 2
+    },
+    "select": {
+      "correct": 1,
+      "total": 2
+    }
+  },
+  "by_nondeterminism": {
+    "medium": {
+      "correct": 3,
+      "total": 5
+    }
+  },
+  "per_example": [
+    {
+      "index": 0,
+      "ground_truth_event_type": "GoBlock",
+      "predicted_event_type": "GoUnblock",
+      "match": false,
+      "pattern": "channel",
+      "nondeterminism": "medium",
+      "error": null
+    },
+    {
+      "index": 3,
+      "ground_truth_event_type": "GoStart",
+      "predicted_event_type": "GoStart",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium",
+      "error": null
+    },
+    {
+      "index": 1,
+      "ground_truth_event_type": "GoStart",
+      "predicted_event_type": "GoCreate",
+      "match": false,
+      "pattern": "select",
+      "nondeterminism": "medium",
+      "error": null
+    },
+    {
+      "index": 2,
+      "ground_truth_event_type": "GoCreate",
+      "predicted_event_type": "GoCreate",
+      "match": true,
+      "pattern": "mutex",
+      "nondeterminism": "medium",
+      "error": null
+    },
+    {
+      "index": 4,
+      "ground_truth_event_type": "GoStart",
+      "predicted_event_type": "GoStart",
+      "match": true,
+      "pattern": "select",
+      "nondeterminism": "medium",
+      "error": null
+    }
+  ]
+}

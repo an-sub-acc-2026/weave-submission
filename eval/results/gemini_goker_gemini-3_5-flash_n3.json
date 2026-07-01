@@ -1,0 +1,58 @@
+{
+  "model": "gemini-3.5-flash",
+  "thinking_budget": 0,
+  "total": 3,
+  "correct": 0,
+  "accuracy": 0.0,
+  "errors": 0,
+  "elapsed_seconds": 19.016829013824463,
+  "by_pattern": {
+    "channel": {
+      "correct": 0,
+      "total": 1
+    },
+    "select": {
+      "correct": 0,
+      "total": 1
+    },
+    "mutex": {
+      "correct": 0,
+      "total": 1
+    }
+  },
+  "by_nondeterminism": {
+    "medium": {
+      "correct": 0,
+      "total": 3
+    }
+  },
+  "per_example": [
+    {
+      "index": 0,
+      "ground_truth_event_type": "GoBlock",
+      "predicted_event_type": "GoUnblock",
+      "match": false,
+      "pattern": "channel",
+      "nondeterminism": "medium",
+      "error": null
+    },
+    {
+      "index": 1,
+      "ground_truth_event_type": "GoStart",
+      "predicted_event_type": null,
+      "match": false,
+      "pattern": "select",
+      "nondeterminism": "medium",
+      "error": null
+    },
+    {
+      "index": 2,
+      "ground_truth_event_type": "GoCreate",
+      "predicted_event_type": null,
+      "match": false,
+      "pattern": "mutex",
+      "nondeterminism": "medium",
+      "error": null
+    }
+  ]
+}

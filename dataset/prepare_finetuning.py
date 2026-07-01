@@ -1,0 +1,483 @@
+#!/usr/bin/env python3
+"""
+dataset/prepare_finetuning.py
+
+Processes Weave's aggregated execution trace dataset and outputs training/validation
+JSONL files in HuggingFace Chat Template (messages) format.
+
+Supports two distinct SFT target strategies:
+  1. dist: Targets are explicit JSON probability distributions over event types.
+  2. point: Targets are individual point predictions (event_type & goroutine_id)
+     duplicated proportionally to their empirical occurrence. This allows standard
+     cross-entropy next-token prediction to approximate the target distribution.
+
+Verifies and splits programs into 80% train / 20% validation, stratified by pattern.
+"""
+
+import argparse
+import os
+import json
+import random
+import glob
+import logging
+import copy
+from collections import defaultdict
+from typing import Any, Dict, List, Tuple
+
+try:
+    from transformers import AutoTokenizer
+    tokenizer = AutoTokenizer.from_pretrained("Qwen/Qwen3-8B", trust_remote_code=True)
+except Exception as e:
+    tokenizer = None
+
+# Setup logging
+logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
+
+# File paths
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+DATASET_DIR = os.path.join(BASE_DIR, "dataset", "output")
+AGGREGATED_FILE = os.path.join(DATASET_DIR, "aggregated.json")
+
+# Categories for stratification
+ALL_EVENT_TYPES = ["GoBlock", "GoCreate", "GoEnd", "GoSched", "GoStart", "GoUnblock"]
+
+
+def load_aggregated_dataset() -> List[Dict[str, Any]]:
+    """Loads the aggregated dataset JSON."""
+    if not os.path.exists(AGGREGATED_FILE):
+        raise FileNotFoundError(f"Aggregated file not found at: {AGGREGATED_FILE}. Run aggregate.py first.")
+    with open(AGGREGATED_FILE, "r") as f:
+        return json.load(f)
+
+
+def build_prompts(
+    group: Dict[str, Any]
+) -> Tuple[str, str, List[Tuple[Dict[str, Any], int]]]:
+    """
+    Finds and loads per-run example files for a group to extract source,
+    partial trace structure, and next event targets.
+    Returns:
+        (program_source, partial_trace_json, next_events_list)
+    """
+    program_id = group["program_id"]
+    split_percent = group["split_percent"]
+
+    # Locate available run files
+    pattern = os.path.join(DATASET_DIR, f"{program_id}_run*_split{split_percent}.json")
+    run_files = glob.glob(pattern)
+
+    if not run_files:
+        # Check if it was a deadlock/timeout run (stored under run*_deadlock.json)
+        pattern_deadlock = os.path.join(DATASET_DIR, f"{program_id}_run*_deadlock.json")
+        run_files = glob.glob(pattern_deadlock)
+
+    if not run_files:
+        raise RuntimeError(f"No run files found for {program_id} split {split_percent}")
+
+    # Read program source and partial trace from the first available run file
+    with open(run_files[0], "r") as f:
+        sample_data = json.load(f)
+    
+    program_source = sample_data["program_source"]
+    partial_trace = sample_data["partial_trace"]
+
+    # Gather targets from all active runs in this group
+    next_events = []
+    for rf in run_files:
+        with open(rf, "r") as f:
+            data = json.load(f)
+        if data.get("timed_out"):
+            # Deadlocks/timeouts have no valid next event
+            continue
+        if data.get("next_event"):
+            next_events.append((data["next_event"], data["run_index"]))
+
+    return program_source, partial_trace, next_events
+
+
+def smart_truncate_messages(messages: List[Dict[str, str]], max_tokens: int = 4000) -> List[Dict[str, str]]:
+    """Smartly shrinks the program and trace sections so the prompt fits under max_tokens."""
+    if not tokenizer:
+        return messages
+    
+    msgs = copy.deepcopy(messages)
+    prompt = tokenizer.apply_chat_template(msgs, tokenize=False)
+    tokens = tokenizer(prompt)["input_ids"]
+    if len(tokens) <= max_tokens:
+        return msgs
+
+    user_content = msgs[1]["content"]
+
+    # 1. Truncate Trace to last 10 events and cap string size
+    try:
+        trace_start = user_content.index("<trace>\n") + len("<trace>\n")
+        trace_end = user_content.index("\n</trace>")
+        trace_str = user_content[trace_start:trace_end]
+        
+        trace_json = json.loads(trace_str)
+        if len(trace_json) > 10:
+            trace_json = trace_json[-10:]
+            
+        # If trace is still huge, remove goroutines block from all but last event
+        trace_str = json.dumps(trace_json, indent=2)
+        if len(trace_str) > 8000:
+            for i in range(len(trace_json) - 1):
+                if "goroutines" in trace_json[i]:
+                    trace_json[i]["goroutines"] = "... [TRUNCATED FOR LENGTH] ..."
+            trace_str = json.dumps(trace_json, indent=2)
+            
+            if len(trace_str) > 8000:
+                trace_str = trace_str[:4000] + "\n... [TRUNCATED TRACE] ...\n" + trace_str[-4000:]
+                
+        user_content = user_content[:trace_start] + trace_str + user_content[trace_end:]
+        msgs[1]["content"] = user_content
+            
+    except Exception:
+        pass
+
+    prompt = tokenizer.apply_chat_template(msgs, tokenize=False)
+    tokens = tokenizer(prompt)["input_ids"]
+    if len(tokens) <= max_tokens:
+        return msgs
+
+    # 2. Truncate Current State
+    try:
+        state_start = user_content.index("<current_state>\n") + len("<current_state>\n")
+        state_end = user_content.index("\n</current_state>")
+        state_str = user_content[state_start:state_end]
+        
+        if len(state_str) > 1000:
+            state_str = state_str[:1000] + "\n... [TRUNCATED STATE] ..."
+            user_content = user_content[:state_start] + state_str + user_content[state_end:]
+            msgs[1]["content"] = user_content
+            
+    except Exception:
+        pass
+
+    prompt = tokenizer.apply_chat_template(msgs, tokenize=False)
+    tokens = tokenizer(prompt)["input_ids"]
+    if len(tokens) <= max_tokens:
+        return msgs
+
+    # 3. Truncate Program iteratively
+    try:
+        prog_start = user_content.index("<program>\n") + len("<program>\n")
+        prog_end = user_content.index("\n</program>")
+        prog_str = user_content[prog_start:prog_end]
+        
+        # We will use a safe static length to guarantee it fits. 4000 tokens is ~12,000 characters total.
+        # If the tokens are still > max_tokens, the program is the largest block remaining.
+        if len(prog_str) > 2000:
+            prog_str = prog_str[:1000] + "\n... [TRUNCATED] ...\n" + prog_str[-1000:]
+            user_content = user_content[:prog_start] + prog_str + user_content[prog_end:]
+            msgs[1]["content"] = user_content
+            
+            prompt = tokenizer.apply_chat_template(msgs, tokenize=False)
+            tokens = tokenizer(prompt)["input_ids"]
+            
+            if len(tokens) > max_tokens:
+                # Still too big, truncate even more aggressively
+                prog_end_new = user_content.index("\n</program>")
+                prog_str_new = user_content[prog_start:prog_end_new]
+                prog_str_new = prog_str_new[:500] + "\n... [TRUNCATED] ...\n"
+                user_content = user_content[:prog_start] + prog_str_new + user_content[prog_end_new:]
+                msgs[1]["content"] = user_content
+    except Exception:
+        pass
+
+    return msgs
+
+
+WAITER_KEYS = {"send_waiters", "recv_waiters"}
+
+
+def mask_waiter_fields(trace: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+    """Recursively remove send_waiters/recv_waiters from all dicts in trace."""
+    def _strip(obj: Any) -> Any:
+        if isinstance(obj, dict):
+            return {k: _strip(v) for k, v in obj.items() if k not in WAITER_KEYS}
+        if isinstance(obj, list):
+            return [_strip(item) for item in obj]
+        return obj
+    return _strip(trace)
+
+
+def format_dist_chat_message(
+    program_source: str,
+    partial_trace: List[Dict[str, Any]],
+    distribution: Dict[str, float]
+) -> Dict[str, Any]:
+    """Formats an SFT example for Explicit Distribution target (KL loss)."""
+    trace_json = json.dumps(partial_trace, indent=2)
+    current_state_json = json.dumps(partial_trace[-1], indent=2) if partial_trace else "{}"
+
+    user_content = f"""You are reasoning about concurrent Go program execution.
+
+Here is a Go program:
+<program>
+{program_source}
+</program>
+
+Here is a partial execution trace showing goroutine scheduler events so far:
+<trace>
+{trace_json}
+</trace>
+
+The current goroutine states are:
+<current_state>
+{current_state_json}
+</current_state>
+
+Predict the DISTRIBUTION over next scheduler events. All probabilities must sum to 1.0.
+Respond ONLY in JSON with exactly these keys — no markdown fences, no text outside the JSON object:
+{{"GoBlock": p, "GoCreate": p, "GoEnd": p, "GoSched": p, "GoStart": p, "GoUnblock": p}}"""
+
+    assistant_content = json.dumps(distribution)
+
+    messages = [
+        {"role": "system", "content": "You are a code execution simulator."},
+        {"role": "user", "content": user_content},
+        {"role": "assistant", "content": assistant_content}
+    ]
+
+    return {"messages": smart_truncate_messages(messages)}
+
+
+def format_point_chat_message(
+    program_source: str, 
+    partial_trace: List[Dict[str, Any]], 
+    next_event: Dict[str, Any]
+) -> Dict[str, Any]:
+    """Formats an SFT example for point-prediction targets (duplication)."""
+    trace_json = json.dumps(partial_trace, indent=2)
+    current_state_json = json.dumps(partial_trace[-1], indent=2) if partial_trace else "{}"
+
+    user_content = f"""You are reasoning about concurrent Go program execution.
+
+Here is a Go program:
+<program>
+{program_source}
+</program>
+
+Here is a partial execution trace showing goroutine scheduler events so far:
+<trace>
+{trace_json}
+</trace>
+
+The current goroutine states are:
+<current_state>
+{current_state_json}
+</current_state>
+
+Predict the next scheduler event. What happens next?
+Respond in JSON only — no markdown fences, no text outside the JSON object:
+{{"event_type":"GoStart|GoBlock|GoUnblock|GoCreate|GoEnd|GoSched","goroutine_id":<integer>,"reasoning":"<brief explanation>","confidence":"high|medium|low"}}"""
+
+    assistant_content = json.dumps({
+        "event_type": next_event["event_type"],
+        "goroutine_id": int(next_event["goroutine_id"])
+    })
+
+    messages = [
+        {"role": "system", "content": "You are a code execution simulator."},
+        {"role": "user", "content": user_content},
+        {"role": "assistant", "content": assistant_content}
+    ]
+
+    return {"messages": smart_truncate_messages(messages)}
+
+
+def split_programs(aggregated: List[Dict[str, Any]], seed: int = 42) -> Tuple[set, set]:
+    """Splits program IDs by holding out all GoKer programs for evaluation,
+    and using hand-crafted and generated programs for training."""
+    train_progs = set()
+    val_progs = set()
+
+    for group in aggregated:
+        prog_id = group["program_id"]
+        if prog_id.startswith("goker_"):
+            val_progs.add(prog_id)
+        else:
+            train_progs.add(prog_id)
+
+    # Log split counts by pattern
+    train_patterns = defaultdict(set)
+    val_patterns = defaultdict(set)
+    for group in aggregated:
+        prog_id = group["program_id"]
+        pat = group["concurrency_pattern"]
+        if prog_id in train_progs:
+            train_patterns[pat].add(prog_id)
+        else:
+            val_patterns[pat].add(prog_id)
+
+    logging.info("--- SPLIT BY PATTERN ---")
+    for pat in sorted(set(list(train_patterns.keys()) + list(val_patterns.keys()))):
+        num_train = len(train_patterns[pat])
+        num_val = len(val_patterns[pat])
+        logging.info(f"Pattern '{pat}': {num_train} train, {num_val} val (held-out GoKer)")
+
+    return train_progs, val_progs
+
+
+def _get_event_type(point_msg: Dict[str, Any]) -> str:
+    """Extracts event_type from a point chat message's assistant content."""
+    try:
+        assistant_content = next(
+            m["content"] for m in point_msg["messages"] if m["role"] == "assistant"
+        )
+        return json.loads(assistant_content)["event_type"]
+    except Exception:
+        return "unknown"
+
+
+def balance_by_event_type(
+    items: List[Dict[str, Any]],
+    min_per_class: int = 200,
+    seed: int = 42,
+) -> List[Dict[str, Any]]:
+    """Oversample rare event types so each class has at least min_per_class examples.
+    Dominant classes are kept as-is (no downsampling). Result is shuffled."""
+    rng = random.Random(seed)
+
+    # Group by event type
+    by_type: Dict[str, List[Dict]] = defaultdict(list)
+    for item in items:
+        by_type[_get_event_type(item)].append(item)
+
+    logging.info("--- EVENT TYPE DISTRIBUTION (before balancing) ---")
+    for et in sorted(by_type):
+        logging.info(f"  {et:12s}: {len(by_type[et])} examples")
+
+    balanced = list(items)  # start with all originals
+    for et, pool in by_type.items():
+        deficit = min_per_class - len(pool)
+        if deficit > 0:
+            oversampled = rng.choices(pool, k=deficit)
+            balanced.extend(oversampled)
+            logging.info(f"  Oversampled {et}: +{deficit} → {len(pool) + deficit} total")
+
+    logging.info("--- EVENT TYPE DISTRIBUTION (after balancing) ---")
+    after: Dict[str, int] = defaultdict(int)
+    for item in balanced:
+        after[_get_event_type(item)] += 1
+    for et in sorted(after):
+        logging.info(f"  {et:12s}: {after[et]} examples")
+
+    rng.shuffle(balanced)
+    return balanced
+
+
+def main():
+    """Main execution function."""
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--balanced", action="store_true",
+        help="Oversample rare event types to min_per_class in training set (Phase 23)."
+    )
+    parser.add_argument(
+        "--min-per-class", type=int, default=200,
+        help="Minimum examples per event type when --balanced is set (default: 200)."
+    )
+    parser.add_argument(
+        "--mask-waiters", action="store_true",
+        help="Strip send_waiters/recv_waiters fields from all prompts (instrumentation-only ablation)."
+    )
+    args = parser.parse_args()
+
+    logging.info("Starting SFT dataset preparation...")
+    if args.balanced:
+        logging.info(f"BALANCED MODE: oversampling rare events to min {args.min_per_class} per class.")
+    if args.mask_waiters:
+        logging.info("MASK-WAITERS MODE: stripping send_waiters/recv_waiters from all prompts.")
+
+    try:
+        aggregated = load_aggregated_dataset()
+    except Exception as e:
+        logging.error(f"Failed to load dataset: {e}")
+        return
+
+    # Train / Val GoKer held-out split
+    train_progs, val_progs = split_programs(aggregated)
+    logging.info(f"Total split summary: {len(train_progs)} training programs, {len(val_progs)} validation programs.")
+
+    train_dist_items = []
+    val_dist_items = []
+    train_point_items = []
+    val_point_items = []
+
+    for idx, group in enumerate(aggregated, 1):
+        program_id = group["program_id"]
+        split_percent = group["split_percent"]
+        dist = group["next_event_distribution"]
+        is_train = program_id in train_progs
+
+        try:
+            source, partial_trace, next_events = build_prompts(group)
+        except Exception as e:
+            logging.warning(f"Skipping group ({program_id}, {split_percent}%): {e}")
+            continue
+
+        if args.mask_waiters:
+            partial_trace = mask_waiter_fields(partial_trace)
+
+        # 1. Dist mode SFT format
+        dist_msg = format_dist_chat_message(source, partial_trace, dist)
+        dist_msg["concurrency_pattern"] = group["concurrency_pattern"]
+        dist_msg["nondeterminism"] = group["nondeterminism"]
+        if is_train:
+            train_dist_items.append(dist_msg)
+        else:
+            val_dist_items.append(dist_msg)
+
+        # 2. Point mode SFT format (Frequency Duplication)
+        for next_evt, run_idx in next_events:
+            point_msg = format_point_chat_message(source, partial_trace, next_evt)
+            point_msg["concurrency_pattern"] = group["concurrency_pattern"]
+            point_msg["nondeterminism"] = group["nondeterminism"]
+            point_msg["program_id"] = program_id
+            point_msg["split_percent"] = split_percent
+            if is_train:
+                train_point_items.append(point_msg)
+            else:
+                val_point_items.append(point_msg)
+
+    # Apply stratified oversampling if requested (Phase 23)
+    if args.balanced:
+        train_point_balanced = balance_by_event_type(
+            train_point_items, min_per_class=args.min_per_class
+        )
+    else:
+        train_point_balanced = None
+
+    # Write output files
+    os.makedirs(os.path.join(DATASET_DIR, "kaggle_upload"), exist_ok=True)
+
+    suffix = "_masked" if args.mask_waiters else ""
+    files_to_write = [
+        (f"train_dist{suffix}.jsonl", train_dist_items),
+        (f"val_dist{suffix}.jsonl", val_dist_items),
+        (f"train_point_dups{suffix}.jsonl", train_point_items),
+        (f"val_point_dups{suffix}.jsonl", val_point_items),
+    ]
+    if train_point_balanced is not None:
+        files_to_write.append((f"train_point_dups_balanced{suffix}.jsonl", train_point_balanced))
+
+    for fname, data_list in files_to_write:
+        out_path = os.path.join(DATASET_DIR, fname)
+        with open(out_path, "w") as f:
+            for item in data_list:
+                f.write(json.dumps(item) + "\n")
+        logging.info(f"Wrote {len(data_list)} examples to {out_path}")
+
+        kaggle_out_path = os.path.join(DATASET_DIR, "kaggle_upload", fname)
+        with open(kaggle_out_path, "w") as f:
+            for item in data_list:
+                f.write(json.dumps(item) + "\n")
+        logging.info(f"Synced {len(data_list)} examples to {kaggle_out_path}")
+
+    logging.info("SFT dataset preparation complete!")
+
+
+if __name__ == "__main__":
+    main()

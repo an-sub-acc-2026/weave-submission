@@ -1,0 +1,42 @@
+# Prerequisites
+.venv/
+venv/
+env/
+
+# Python Caches and Compilation
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+
+# Go compilation/logs
+*.out
+*.exe
+*.test
+*.prof
+
+# Large generated data files
+dataset/output/
+
+# OS metadata
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Environments & Keys
+.env
+.env.local
+.env.*.local
+*.key
+*.pem
+
+# IDEs
+.vscode/
+.idea/
+.antigravity-ide/

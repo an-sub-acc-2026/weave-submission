@@ -1,0 +1,860 @@
+{
+  "adapter": "/root/lora_adapter_traj",
+  "backend": "unsloth",
+  "steps": 15,
+  "samples": 3,
+  "n_programs": 54,
+  "results": [
+    {
+      "program_id": "goker_cockroach_10214",
+      "outcome": "leak",
+      "event_counts": {
+        "GoStart": 13,
+        "GoBlock": 15,
+        "GoCreate": 6
+      },
+      "top_event": "GoBlock",
+      "top_event_pct": 0.4412,
+      "entropy_bits": 1.4928,
+      "mean_survival_steps": 11.0,
+      "steps": 15,
+      "samples": 3
+    },
+    {
+      "program_id": "goker_cockroach_1055",
+      "outcome": "leak",
+      "event_counts": {
+        "GoBlock": 20,
+        "GoStart": 12,
+        "GoUnblock": 2,
+        "GoCreate": 2
+      },
+      "top_event": "GoBlock",
+      "top_event_pct": 0.5556,
+      "entropy_bits": 1.4628,
+      "mean_survival_steps": 12.0,
+      "steps": 15,
+      "samples": 3
+    },
+    {
+      "program_id": "goker_cockroach_10790",
+      "outcome": "leak",
+      "event_counts": {
+        "GoCreate": 9,
+        "GoBlock": 12,
+        "GoStart": 11
+      },
+      "top_event": "GoBlock",
+      "top_event_pct": 0.375,
+      "entropy_bits": 1.5749,
+      "mean_survival_steps": 10.33,
+      "steps": 15,
+      "samples": 3
+    },
+    {
+      "program_id": "goker_cockroach_13197",
+      "outcome": "leak",
+      "event_counts": {
+        "GoCreate": 12,
+        "GoBlock": 18,
+        "GoStart": 14
+      },
+      "top_event": "GoBlock",
+      "top_event_pct": 0.4091,
+      "entropy_bits": 1.5644,
+      "mean_survival_steps": 14.67,
+      "steps": 15,
+      "samples": 3
+    },
+    {
+      "program_id": "goker_cockroach_13755",
+      "outcome": "leak",
+      "event_counts": {
+        "GoStart": 10,
+        "GoBlock": 13,
+        "GoUnblock": 3
+      },
+      "top_event": "GoBlock",
+      "top_event_pct": 0.5,
+      "entropy_bits": 1.3897,
+      "mean_survival_steps": 8.33,
+      "steps": 15,
+      "samples": 3
+    },
+    {
+      "program_id": "goker_cockroach_1462",
+      "outcome": "leak",
+      "event_counts": {
+        "GoStart": 10,
+        "GoBlock": 13,
+        "GoUnblock": 3,
+        "GoCreate": 3
+      },
+      "top_event": "GoBlock",
+      "top_event_pct": 0.4483,
+      "entropy_bits": 1.7257,
+      "mean_survival_steps": 9.67,
+      "steps": 15,
+      "samples": 3
+    },
+    {
+      "program_id": "goker_cockroach_16167",
+      "outcome": "leak",
+      "event_counts": {
+        "GoBlock": 18,
+        "GoStart": 8,
+        "GoUnblock": 3
+      },
+      "top_event": "GoBlock",
+      "top_event_pct": 0.6207,
+      "entropy_bits": 1.2782,
+      "mean_survival_steps": 9.0,
+      "steps": 15,
+      "samples": 3
+    },
+    {
+      "program_id": "goker_cockroach_18101",
+      "outcome": "leak",
+      "event_counts": {
+        "GoCreate": 10,
+        "GoBlock": 13,
+        "GoStart": 11
+      },
+      "top_event": "GoBlock",
+      "top_event_pct": 0.3824,
+      "entropy_bits": 1.5763,
+      "mean_survival_steps": 11.33,
+      "steps": 15,
+      "samples": 3
+    },
+    {
+      "program_id": "goker_cockroach_2448",
+      "outcome": "leak",
+      "event_counts": {
+        "GoStart": 8,
+        "GoBlock": 7,
+        "GoCreate": 3
+      },
+      "top_event": "GoStart",
+      "top_event_pct": 0.4444,
+      "entropy_bits": 1.4807,
+      "mean_survival_steps": 6.0,
+      "steps": 15,
+      "samples": 3
+    },
+    {
+      "program_id": "goker_cockroach_3710",
+      "outcome": "leak",
+      "event_counts": {
+        "GoCreate": 12,
+        "GoBlock": 18,
+        "GoStart": 15
+      },
+      "top_event": "GoBlock",
+      "top_event_pct": 0.4,
+      "entropy_bits": 1.5656,
+      "mean_survival_steps": 15.0,
+      "steps": 15,
+      "samples": 3
+    },
+    {
+      "program_id": "goker_cockroach_4407",
+      "outcome": "race",
+      "event_counts": {
+        "GoBlock": 18,
+        "GoStart": 9,
+        "GoUnblock": 2
+      },
+      "top_event": "GoBlock",
+      "top_event_pct": 0.6207,
+      "entropy_bits": 1.217,
+      "mean_survival_steps": 9.33,
+      "steps": 15,
+      "samples": 3
+    },
+    {
+      "program_id": "goker_cockroach_584",
+      "outcome": "leak",
+      "event_counts": {
+        "GoCreate": 12,
+        "GoStart": 15,
+        "GoBlock": 18
+      },
+      "top_event": "GoBlock",
+      "top_event_pct": 0.4,
+      "entropy_bits": 1.5656,
+      "mean_survival_steps": 15.0,
+      "steps": 15,
+      "samples": 3
+    },
+    {
+      "program_id": "goker_etcd_3077",
+      "outcome": "race",
+      "event_counts": {
+        "GoBlock": 20,
+        "GoStart": 11,
+        "GoUnblock": 6,
+        "GoCreate": 3
+      },
+      "top_event": "GoBlock",
+      "top_event_pct": 0.5,
+      "entropy_bits": 1.703,
+      "mean_survival_steps": 13.33,
+      "steps": 15,
+      "samples": 3
+    },
+    {
+      "program_id": "goker_etcd_4876",
+      "outcome": "race",
+      "event_counts": {
+        "GoBlock": 19,
+        "GoStart": 11,
+        "GoUnblock": 10
+      },
+      "top_event": "GoBlock",
+      "top_event_pct": 0.475,
+      "entropy_bits": 1.5223,
+      "mean_survival_steps": 13.33,
+      "steps": 15,
+      "samples": 3
+    },
+    {
+      "program_id": "goker_etcd_6857",
+      "outcome": "leak",
+      "event_counts": {
+        "GoStart": 9,
+        "GoBlock": 14,
+        "GoUnblock": 1
+      },
+      "top_event": "GoBlock",
+      "top_event_pct": 0.5833,
+      "entropy_bits": 1.1753,
+      "mean_survival_steps": 7.67,
+      "steps": 15,
+      "samples": 3
+    },
+    {
+      "program_id": "goker_etcd_6873",
+      "outcome": "leak",
+      "event_counts": {
+        "GoBlock": 11,
+        "GoStart": 7
+      },
+      "top_event": "GoBlock",
+      "top_event_pct": 0.6111,
+      "entropy_bits": 0.9641,
+      "mean_survival_steps": 5.67,
+      "steps": 15,
+      "samples": 3
+    },
+    {
+      "program_id": "goker_etcd_7443",
+      "outcome": "leak",
+      "event_counts": {
+        "GoBlock": 20,
+        "GoCreate": 13,
+        "GoStart": 10
+      },
+      "top_event": "GoBlock",
+      "top_event_pct": 0.4651,
+      "entropy_bits": 1.5248,
+      "mean_survival_steps": 14.33,
+      "steps": 15,
+      "samples": 3
+    },
+    {
+      "program_id": "goker_etcd_7902",
+      "outcome": "leak",
+      "event_counts": {
+        "GoBlock": 18,
+        "GoStart": 8,
+        "GoCreate": 6
+      },
+      "top_event": "GoBlock",
+      "top_event_pct": 0.5625,
+      "entropy_bits": 1.4197,
+      "mean_survival_steps": 10.33,
+      "steps": 15,
+      "samples": 3
+    },
+    {
+      "program_id": "goker_etcd_8194",
+      "outcome": "race",
+      "event_counts": {
+        "GoCreate": 1,
+        "GoBlock": 8,
+        "GoStart": 6,
+        "GoUnblock": 3
+      },
+      "top_event": "GoBlock",
+      "top_event_pct": 0.4444,
+      "entropy_bits": 1.7108,
+      "mean_survival_steps": 6.0,
+      "steps": 15,
+      "samples": 3
+    },
+    {
+      "program_id": "goker_grpc_1275",
+      "outcome": "leak",
+      "event_counts": {
+        "GoStart": 13,
+        "GoBlock": 13,
+        "GoCreate": 1,
+        "GoUnblock": 2
+      },
+      "top_event": "GoStart",
+      "top_event_pct": 0.4483,
+      "entropy_bits": 1.4714,
+      "mean_survival_steps": 9.33,
+      "steps": 15,
+      "samples": 3
+    },
+    {
+      "program_id": "goker_grpc_1353",
+      "outcome": "leak",
+      "event_counts": {
+        "GoCreate": 8,
+        "GoBlock": 17,
+        "GoStart": 16,
+        "GoUnblock": 2
+      },
+      "top_event": "GoBlock",
+      "top_event_pct": 0.3953,
+      "entropy_bits": 1.7173,
+      "mean_survival_steps": 14.33,
+      "steps": 15,
+      "samples": 3
+    },
+    {
+      "program_id": "goker_grpc_1424",
+      "outcome": "leak",
+      "event_counts": {
+        "GoCreate": 8,
+        "GoBlock": 11,
+        "GoStart": 9
+      },
+      "top_event": "GoBlock",
+      "top_event_pct": 0.3929,
+      "entropy_bits": 1.5722,
+      "mean_survival_steps": 9.33,
+      "steps": 15,
+      "samples": 3
+    },
+    {
+      "program_id": "goker_grpc_1460",
+      "outcome": "leak",
+      "event_counts": {
+        "GoCreate": 6,
+        "GoBlock": 16,
+        "GoStart": 14,
+        "GoUnblock": 3
+      },
+      "top_event": "GoBlock",
+      "top_event_pct": 0.4103,
+      "entropy_bits": 1.758,
+      "mean_survival_steps": 12.67,
+      "steps": 15,
+      "samples": 3
+    },
+    {
+      "program_id": "goker_grpc_1748",
+      "outcome": "race",
+      "event_counts": {
+        "GoBlock": 7,
+        "GoStart": 8,
+        "GoUnblock": 4
+      },
+      "top_event": "GoStart",
+      "top_event_pct": 0.4211,
+      "entropy_bits": 1.5294,
+      "mean_survival_steps": 5.67,
+      "steps": 15,
+      "samples": 3
+    },
+    {
+      "program_id": "goker_grpc_2371",
+      "outcome": "race",
+      "event_counts": {
+        "GoBlock": 10,
+        "GoStart": 8
+      },
+      "top_event": "GoBlock",
+      "top_event_pct": 0.5556,
+      "entropy_bits": 0.9911,
+      "mean_survival_steps": 6.0,
+      "steps": 15,
+      "samples": 3
+    },
+    {
+      "program_id": "goker_grpc_3090",
+      "outcome": "race",
+      "event_counts": {
+        "GoBlock": 18,
+        "GoCreate": 9,
+        "GoStart": 7
+      },
+      "top_event": "GoBlock",
+      "top_event_pct": 0.5294,
+      "entropy_bits": 1.4628,
+      "mean_survival_steps": 11.33,
+      "steps": 15,
+      "samples": 3
+    },
+    {
+      "program_id": "goker_grpc_660",
+      "outcome": "leak",
+      "event_counts": {
+        "GoBlock": 13,
+        "GoStart": 5,
+        "GoCreate": 4
+      },
+      "top_event": "GoBlock",
+      "top_event_pct": 0.5909,
+      "entropy_bits": 1.3815,
+      "mean_survival_steps": 6.67,
+      "steps": 15,
+      "samples": 3
+    },
+    {
+      "program_id": "goker_grpc_862",
+      "outcome": "leak",
+      "event_counts": {
+        "GoStart": 12,
+        "GoBlock": 18,
+        "GoCreate": 6
+      },
+      "top_event": "GoBlock",
+      "top_event_pct": 0.5,
+      "entropy_bits": 1.4591,
+      "mean_survival_steps": 11.67,
+      "steps": 15,
+      "samples": 3
+    },
+    {
+      "program_id": "goker_istio_17860",
+      "outcome": "leak",
+      "event_counts": {
+        "GoBlock": 23,
+        "GoStart": 12,
+        "GoUnblock": 4
+      },
+      "top_event": "GoBlock",
+      "top_event_pct": 0.5897,
+      "entropy_bits": 1.3095,
+      "mean_survival_steps": 13.0,
+      "steps": 15,
+      "samples": 3
+    },
+    {
+      "program_id": "goker_istio_18454",
+      "outcome": "leak",
+      "event_counts": {
+        "GoBlock": 17,
+        "GoCreate": 12,
+        "GoStart": 12
+      },
+      "top_event": "GoBlock",
+      "top_event_pct": 0.4146,
+      "entropy_bits": 1.5642,
+      "mean_survival_steps": 13.67,
+      "steps": 15,
+      "samples": 3
+    },
+    {
+      "program_id": "goker_istio_8144",
+      "outcome": "race",
+      "event_counts": {
+        "GoBlock": 16,
+        "GoStart": 6,
+        "GoUnblock": 4
+      },
+      "top_event": "GoBlock",
+      "top_event_pct": 0.6154,
+      "entropy_bits": 1.3347,
+      "mean_survival_steps": 8.67,
+      "steps": 15,
+      "samples": 3
+    },
+    {
+      "program_id": "goker_istio_8214",
+      "outcome": "race",
+      "event_counts": {
+        "GoBlock": 21,
+        "GoStart": 13,
+        "GoCreate": 5,
+        "GoUnblock": 4
+      },
+      "top_event": "GoBlock",
+      "top_event_pct": 0.4884,
+      "entropy_bits": 1.7064,
+      "mean_survival_steps": 14.33,
+      "steps": 15,
+      "samples": 3
+    },
+    {
+      "program_id": "goker_istio_8967",
+      "outcome": "race",
+      "event_counts": {
+        "GoBlock": 12,
+        "GoStart": 6,
+        "GoUnblock": 1,
+        "GoCreate": 3
+      },
+      "top_event": "GoBlock",
+      "top_event_pct": 0.5455,
+      "entropy_bits": 1.5829,
+      "mean_survival_steps": 7.33,
+      "steps": 15,
+      "samples": 3
+    },
+    {
+      "program_id": "goker_kubernetes_10182",
+      "outcome": "leak",
+      "event_counts": {
+        "GoBlock": 10,
+        "GoStart": 4,
+        "GoUnblock": 3
+      },
+      "top_event": "GoBlock",
+      "top_event_pct": 0.5882,
+      "entropy_bits": 1.3831,
+      "mean_survival_steps": 5.67,
+      "steps": 15,
+      "samples": 3
+    },
+    {
+      "program_id": "goker_kubernetes_11298",
+      "outcome": "leak",
+      "event_counts": {
+        "GoStart": 12,
+        "GoCreate": 11,
+        "GoBlock": 12
+      },
+      "top_event": "GoStart",
+      "top_event_pct": 0.3429,
+      "entropy_bits": 1.5838,
+      "mean_survival_steps": 11.67,
+      "steps": 15,
+      "samples": 3
+    },
+    {
+      "program_id": "goker_kubernetes_13135",
+      "outcome": "leak",
+      "event_counts": {
+        "GoCreate": 6,
+        "GoBlock": 21,
+        "GoStart": 12,
+        "GoUnblock": 2
+      },
+      "top_event": "GoBlock",
+      "top_event_pct": 0.5122,
+      "entropy_bits": 1.6315,
+      "mean_survival_steps": 13.67,
+      "steps": 15,
+      "samples": 3
+    },
+    {
+      "program_id": "goker_kubernetes_1321",
+      "outcome": "leak",
+      "event_counts": {
+        "GoCreate": 5,
+        "GoBlock": 13,
+        "GoStart": 9,
+        "GoUnblock": 1
+      },
+      "top_event": "GoBlock",
+      "top_event_pct": 0.4643,
+      "entropy_bits": 1.6558,
+      "mean_survival_steps": 9.0,
+      "steps": 15,
+      "samples": 3
+    },
+    {
+      "program_id": "goker_kubernetes_26980",
+      "outcome": "leak",
+      "event_counts": {
+        "GoBlock": 12,
+        "GoStart": 8,
+        "GoCreate": 1
+      },
+      "top_event": "GoBlock",
+      "top_event_pct": 0.5714,
+      "entropy_bits": 1.2009,
+      "mean_survival_steps": 6.67,
+      "steps": 15,
+      "samples": 3
+    },
+    {
+      "program_id": "goker_kubernetes_30872",
+      "outcome": "leak",
+      "event_counts": {
+        "GoBlock": 15,
+        "GoStart": 12,
+        "GoUnblock": 1
+      },
+      "top_event": "GoBlock",
+      "top_event_pct": 0.5357,
+      "entropy_bits": 1.178,
+      "mean_survival_steps": 9.0,
+      "steps": 15,
+      "samples": 3
+    },
+    {
+      "program_id": "goker_kubernetes_38669",
+      "outcome": "leak",
+      "event_counts": {
+        "GoBlock": 20,
+        "GoCreate": 9,
+        "GoStart": 11
+      },
+      "top_event": "GoBlock",
+      "top_event_pct": 0.5,
+      "entropy_bits": 1.4964,
+      "mean_survival_steps": 13.33,
+      "steps": 15,
+      "samples": 3
+    },
+    {
+      "program_id": "goker_kubernetes_62464",
+      "outcome": "leak",
+      "event_counts": {
+        "GoCreate": 4,
+        "GoBlock": 13,
+        "GoStart": 9
+      },
+      "top_event": "GoBlock",
+      "top_event_pct": 0.5,
+      "entropy_bits": 1.4452,
+      "mean_survival_steps": 8.67,
+      "steps": 15,
+      "samples": 3
+    },
+    {
+      "program_id": "goker_kubernetes_6632",
+      "outcome": "leak",
+      "event_counts": {
+        "GoCreate": 5,
+        "GoBlock": 9,
+        "GoStart": 7
+      },
+      "top_event": "GoBlock",
+      "top_event_pct": 0.4286,
+      "entropy_bits": 1.5452,
+      "mean_survival_steps": 6.67,
+      "steps": 15,
+      "samples": 3
+    },
+    {
+      "program_id": "goker_kubernetes_70892",
+      "outcome": "race",
+      "event_counts": {
+        "GoBlock": 16,
+        "GoStart": 11,
+        "GoUnblock": 6
+      },
+      "top_event": "GoBlock",
+      "top_event_pct": 0.4848,
+      "entropy_bits": 1.4819,
+      "mean_survival_steps": 11.0,
+      "steps": 15,
+      "samples": 3
+    },
+    {
+      "program_id": "goker_kubernetes_77796",
+      "outcome": "race",
+      "event_counts": {
+        "GoBlock": 21,
+        "GoStart": 11,
+        "GoUnblock": 4
+      },
+      "top_event": "GoBlock",
+      "top_event_pct": 0.5833,
+      "entropy_bits": 1.3285,
+      "mean_survival_steps": 11.67,
+      "steps": 15,
+      "samples": 3
+    },
+    {
+      "program_id": "goker_kubernetes_80284",
+      "outcome": "race",
+      "event_counts": {
+        "GoCreate": 8,
+        "GoBlock": 13,
+        "GoStart": 9
+      },
+      "top_event": "GoBlock",
+      "top_event_pct": 0.4333,
+      "entropy_bits": 1.5524,
+      "mean_survival_steps": 10.0,
+      "steps": 15,
+      "samples": 3
+    },
+    {
+      "program_id": "goker_kubernetes_81091",
+      "outcome": "race",
+      "event_counts": {
+        "GoBlock": 15,
+        "GoStart": 7,
+        "GoUnblock": 4
+      },
+      "top_event": "GoBlock",
+      "top_event_pct": 0.5769,
+      "entropy_bits": 1.3829,
+      "mean_survival_steps": 8.33,
+      "steps": 15,
+      "samples": 3
+    },
+    {
+      "program_id": "goker_kubernetes_88331",
+      "outcome": "race",
+      "event_counts": {
+        "GoBlock": 14,
+        "GoStart": 9,
+        "GoUnblock": 2,
+        "GoCreate": 1
+      },
+      "top_event": "GoBlock",
+      "top_event_pct": 0.5385,
+      "entropy_bits": 1.4761,
+      "mean_survival_steps": 8.67,
+      "steps": 15,
+      "samples": 3
+    },
+    {
+      "program_id": "goker_kubernetes_89164",
+      "outcome": "race",
+      "event_counts": {
+        "GoStart": 13,
+        "GoBlock": 14,
+        "GoUnblock": 8,
+        "GoCreate": 2
+      },
+      "top_event": "GoBlock",
+      "top_event_pct": 0.3784,
+      "entropy_bits": 1.766,
+      "mean_survival_steps": 12.33,
+      "steps": 15,
+      "samples": 3
+    },
+    {
+      "program_id": "goker_moby_25384",
+      "outcome": "leak",
+      "event_counts": {
+        "GoBlock": 22,
+        "GoStart": 11,
+        "GoUnblock": 3,
+        "GoCreate": 6
+      },
+      "top_event": "GoBlock",
+      "top_event_pct": 0.5238,
+      "entropy_bits": 1.6679,
+      "mean_survival_steps": 14.0,
+      "steps": 15,
+      "samples": 3
+    },
+    {
+      "program_id": "goker_moby_28462",
+      "outcome": "leak",
+      "event_counts": {
+        "GoCreate": 12,
+        "GoBlock": 18,
+        "GoStart": 15
+      },
+      "top_event": "GoBlock",
+      "top_event_pct": 0.4,
+      "entropy_bits": 1.5656,
+      "mean_survival_steps": 15.0,
+      "steps": 15,
+      "samples": 3
+    },
+    {
+      "program_id": "goker_moby_33781",
+      "outcome": "leak",
+      "event_counts": {
+        "GoStart": 11,
+        "GoBlock": 13,
+        "GoCreate": 6,
+        "GoUnblock": 2
+      },
+      "top_event": "GoBlock",
+      "top_event_pct": 0.4062,
+      "entropy_bits": 1.7603,
+      "mean_survival_steps": 10.67,
+      "steps": 15,
+      "samples": 3
+    },
+    {
+      "program_id": "goker_moby_36114",
+      "outcome": "leak",
+      "event_counts": {
+        "GoCreate": 7,
+        "GoBlock": 12,
+        "GoStart": 12
+      },
+      "top_event": "GoBlock",
+      "top_event_pct": 0.3871,
+      "entropy_bits": 1.5448,
+      "mean_survival_steps": 10.33,
+      "steps": 15,
+      "samples": 3
+    },
+    {
+      "program_id": "goker_serving_2137",
+      "outcome": "leak",
+      "event_counts": {
+        "GoBlock": 19,
+        "GoCreate": 12,
+        "GoStart": 12
+      },
+      "top_event": "GoBlock",
+      "top_event_pct": 0.4419,
+      "entropy_bits": 1.5484,
+      "mean_survival_steps": 14.33,
+      "steps": 15,
+      "samples": 3
+    },
+    {
+      "program_id": "goker_serving_5865",
+      "outcome": "race",
+      "event_counts": {
+        "GoCreate": 7,
+        "GoBlock": 12,
+        "GoStart": 7
+      },
+      "top_event": "GoBlock",
+      "top_event_pct": 0.4615,
+      "entropy_bits": 1.5342,
+      "mean_survival_steps": 8.67,
+      "steps": 15,
+      "samples": 3
+    }
+  ],
+  "outcome_summary": {
+    "leak": {
+      "n": 37,
+      "mean_entropy": 1.4919,
+      "mean_survival_steps": 10.8,
+      "combined_dist": {
+        "GoBlock": 0.4646,
+        "GoCreate": 0.1785,
+        "GoEnd": 0.0,
+        "GoSched": 0.0,
+        "GoStart": 0.3281,
+        "GoUnblock": 0.0288
+      }
+    },
+    "race": {
+      "n": 17,
+      "mean_entropy": 1.4872,
+      "mean_survival_steps": 9.76,
+      "combined_dist": {
+        "GoBlock": 0.505,
+        "GoCreate": 0.0775,
+        "GoEnd": 0.0,
+        "GoSched": 0.0,
+        "GoStart": 0.3022,
+        "GoUnblock": 0.1153
+      }
+    }
+  }
+}

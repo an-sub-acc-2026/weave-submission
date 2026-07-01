@@ -1,0 +1,177 @@
+package tracer
+
+import (
+	"bytes"
+	"context"
+	"fmt"
+	"os"
+	"os/exec"
+	"path/filepath"
+	"strings"
+)
+
+// RunProgram compiles and executes a Go source file with runtime tracing and the race
+// detector enabled. It passes the trace output path via the WEAVE_TRACE_FILE environment
+// variable — the program is expected to honour this variable by calling runtime/trace.Start.
+//
+// The function first builds the binary into outputDir, then runs it. Building separately
+// means that context cancellation kills the actual program binary (not a go-run wrapper),
+// so timeouts work correctly for deadlocked programs.
+//
+// The provided context controls the execution deadline. When the context is cancelled
+// (e.g. due to a timeout), the process is killed and RunResult.TimedOut is set to true.
+// This is the expected behaviour for deadlocked programs.
+func RunProgram(ctx context.Context, sourceFile, outputDir string) (*RunResult, error) {
+	if err := os.MkdirAll(outputDir, 0o755); err != nil {
+		return nil, fmt.Errorf("create output dir %s: %w", outputDir, err)
+	}
+
+	base := filepath.Base(sourceFile)
+	name := strings.TrimSuffix(base, filepath.Ext(base))
+	traceFile := filepath.Join(outputDir, name+".trace")
+	binaryPath := filepath.Join(outputDir, name)
+
+	// Build the binary first (outside the deadline context — build errors are setup errors,
+	// not program errors). Race detector is enabled at build time.
+	buildCmd := exec.Command("go", "build", "-race", "-o", binaryPath, sourceFile)
+	if out, err := buildCmd.CombinedOutput(); err != nil {
+		return nil, fmt.Errorf("build %s: %w\n%s", sourceFile, err, strings.TrimSpace(string(out)))
+	}
+
+	// Run the compiled binary under the caller's context so deadlock timeouts fire correctly.
+	cmd := exec.CommandContext(ctx, binaryPath)
+	cmd.Env = append(os.Environ(), "WEAVE_TRACE_FILE="+traceFile)
+
+	var stdout, stderr bytes.Buffer
+	cmd.Stdout = &stdout
+	cmd.Stderr = &stderr
+
+	runErr := cmd.Run()
+
+	exitCode := 0
+	timedOut := false
+
+	if runErr != nil {
+		if ctx.Err() != nil {
+			// Context was cancelled or deadline exceeded — treat as timeout.
+			timedOut = true
+			exitCode = -1
+		} else if exitErr, ok := runErr.(*exec.ExitError); ok {
+			// Program exited with a non-zero code (e.g. deadlock detected by runtime,
+			// race detected, or explicit os.Exit). This is expected for some test programs.
+			exitCode = exitErr.ExitCode()
+		} else {
+			return nil, fmt.Errorf("run %s: %w", sourceFile, runErr)
+		}
+	}
+
+	return &RunResult{
+		TraceFile:  traceFile,
+		RaceOutput: stderr.String(),
+		ExitCode:   exitCode,
+		TimedOut:   timedOut,
+		Stdout:     stdout.String(),
+		Stderr:     stderr.String(),
+	}, nil
+}
+
+// RunDir compiles a Go package directory (e.g. programs/instrumented/01_chan) and runs
+// it. Unlike RunProgram (which takes a single .go file), this supports programs that
+// import internal packages such as weave/instrumented.
+//
+// extraEnv is merged on top of os.Environ(); use it to set WEAVE_TRACE_FILE,
+// WEAVE_SYNC_FILE, and any other env vars the program reads.
+func RunDir(ctx context.Context, packageDir, outputDir string, extraEnv map[string]string) (*RunResult, error) {
+	if err := os.MkdirAll(outputDir, 0o755); err != nil {
+		return nil, fmt.Errorf("create output dir %s: %w", outputDir, err)
+	}
+
+	name := filepath.Base(packageDir)
+	binaryPath := filepath.Join(outputDir, name)
+
+	buildCmd := exec.Command("go", "build", "-race", "-o", binaryPath, "./"+packageDir)
+	if out, err := buildCmd.CombinedOutput(); err != nil {
+		return nil, fmt.Errorf("build %s: %w\n%s", packageDir, err, strings.TrimSpace(string(out)))
+	}
+
+	env := os.Environ()
+	for k, v := range extraEnv {
+		env = append(env, k+"="+v)
+	}
+
+	// Determine the trace file path from extraEnv for the RunResult.
+	traceFile := extraEnv["WEAVE_TRACE_FILE"]
+
+	cmd := exec.CommandContext(ctx, binaryPath)
+	cmd.Env = env
+
+	var stdout, stderr bytes.Buffer
+	cmd.Stdout = &stdout
+	cmd.Stderr = &stderr
+
+	runErr := cmd.Run()
+
+	exitCode := 0
+	timedOut := false
+
+	if runErr != nil {
+		if ctx.Err() != nil {
+			timedOut = true
+			exitCode = -1
+		} else if exitErr, ok := runErr.(*exec.ExitError); ok {
+			exitCode = exitErr.ExitCode()
+		} else {
+			return nil, fmt.Errorf("run %s: %w", name, runErr)
+		}
+	}
+
+	return &RunResult{
+		TraceFile:  traceFile,
+		RaceOutput: stderr.String(),
+		ExitCode:   exitCode,
+		TimedOut:   timedOut,
+		Stdout:     stdout.String(),
+		Stderr:     stderr.String(),
+	}, nil
+}
+
+// RunCompiledProgram executes a pre-built binary under the tracer, setting the
+// trace file output to traceFile. It passes the trace output path via the
+// WEAVE_TRACE_FILE environment variable.
+func RunCompiledProgram(ctx context.Context, binaryPath, traceFile string) (*RunResult, error) {
+	// Run the compiled binary under the caller's context so deadlock timeouts fire correctly.
+	cmd := exec.CommandContext(ctx, binaryPath)
+	cmd.Env = append(os.Environ(), "WEAVE_TRACE_FILE="+traceFile)
+
+	var stdout, stderr bytes.Buffer
+	cmd.Stdout = &stdout
+	cmd.Stderr = &stderr
+
+	runErr := cmd.Run()
+
+	exitCode := 0
+	timedOut := false
+
+	if runErr != nil {
+		if ctx.Err() != nil {
+			// Context was cancelled or deadline exceeded — treat as timeout.
+			timedOut = true
+			exitCode = -1
+		} else if exitErr, ok := runErr.(*exec.ExitError); ok {
+			// Program exited with a non-zero code.
+			exitCode = exitErr.ExitCode()
+		} else {
+			return nil, fmt.Errorf("run binary %s: %w", binaryPath, runErr)
+		}
+	}
+
+	return &RunResult{
+		TraceFile:  traceFile,
+		RaceOutput: stderr.String(),
+		ExitCode:   exitCode,
+		TimedOut:   timedOut,
+		Stdout:     stdout.String(),
+		Stderr:     stderr.String(),
+	}, nil
+}
+

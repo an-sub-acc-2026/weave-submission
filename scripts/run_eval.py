@@ -1,0 +1,213 @@
+#!/usr/bin/env python3
+"""
+scripts/run_eval.py — standalone eval script. Works on CUDA (RunPod), MPS (Mac
+Apple Silicon), and CPU. No bitsandbytes required — loads in float16/bfloat16.
+
+Usage:
+    # Mac (M-series):
+    uv run python scripts/run_eval.py \
+        --adapter  dataset/output/lora_adapter_v2 \
+        --val_file dataset/output/kaggle_upload/val_point_dups.jsonl
+
+    # RunPod / CUDA:
+    python run_eval.py \
+        --adapter  /root/lora_adapter \
+        --val_file /root/val_point_dups.jsonl \
+        --out_file /root/eval_results.json
+"""
+import argparse, json, time, os
+from collections import defaultdict
+import torch
+
+# Backport set_submodule for PyTorch < 2.1 (RunPod torch 2.4 doesn't have it)
+if not hasattr(torch.nn.Module, "set_submodule"):
+    def _set_submodule(self, target: str, module: torch.nn.Module) -> None:
+        parts = target.split(".")
+        parent = self
+        for part in parts[:-1]:
+            parent = getattr(parent, part)
+        setattr(parent, parts[-1], module)
+    torch.nn.Module.set_submodule = _set_submodule
+
+from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
+from peft import PeftModel
+
+os.environ["HF_HUB_DISABLE_XET"] = "1"
+
+MAX_NEW_TOKENS = 60
+
+
+def get_device():
+    if torch.cuda.is_available():
+        return torch.device("cuda")
+    if torch.backends.mps.is_available():
+        return torch.device("mps")
+    return torch.device("cpu")
+
+
+def evaluate(model, tokenizer, examples, device, args, label="fine-tuned"):
+    """Run eval loop and return results dict."""
+    correct = 0
+    total   = 0
+    per_pattern = defaultdict(lambda: {"correct": 0, "total": 0})
+    per_nd      = defaultdict(lambda: {"correct": 0, "total": 0})
+    confusion   = defaultdict(lambda: defaultdict(int))
+    per_example = []
+    t0 = time.time()
+
+    print(f"\nEvaluating {len(examples)} examples  [{label}]...")
+    for i, ex in enumerate(examples):
+        messages     = ex["messages"]
+        ground_truth = messages[-1]["content"]
+        pattern      = ex.get("concurrency_pattern", "unknown")
+        nd_level     = ex.get("nondeterminism", "unknown")
+
+        prompt_msgs = [m for m in messages if m["role"] != "assistant"]
+        think_kwargs = {}
+        if "qwen3" in args.model_id.lower():
+            think_kwargs["enable_thinking"] = False
+        prompt = tokenizer.apply_chat_template(
+            prompt_msgs, tokenize=False, add_generation_prompt=True,
+            **think_kwargs,
+        )
+        inputs = tokenizer(
+            prompt, return_tensors="pt",
+            truncation=True, max_length=args.max_tokens,
+        ).to(device)
+
+        with torch.no_grad():
+            out_ids = model.generate(
+                **inputs,
+                max_new_tokens=MAX_NEW_TOKENS,
+                do_sample=False,
+                pad_token_id=tokenizer.eos_token_id,
+            )
+
+        new_tokens = out_ids[0][inputs["input_ids"].shape[1]:]
+        prediction = tokenizer.decode(new_tokens, skip_special_tokens=True).strip()
+
+        gt_type = pred_type = None
+        match = False
+        try: gt_type   = json.loads(ground_truth).get("event_type")
+        except Exception: pass
+        try: pred_type = json.loads(prediction).get("event_type")
+        except Exception: pass
+
+        if gt_type and pred_type and gt_type == pred_type:
+            match = True
+            correct += 1
+
+        total += 1
+        per_pattern[pattern]["total"] += 1
+        per_nd[nd_level]["total"]     += 1
+        confusion[gt_type or "parse_err"][pred_type or "parse_err"] += 1
+        if match:
+            per_pattern[pattern]["correct"] += 1
+            per_nd[nd_level]["correct"]     += 1
+
+        per_example.append({
+            "index": i, "ground_truth": ground_truth,
+            "prediction": prediction, "match": match,
+            "pattern": pattern, "nondeterminism": nd_level,
+        })
+
+        if (i + 1) % 10 == 0:
+            elapsed = time.time() - t0
+            print(f"  [{i+1:3d}/{total}]  {correct}/{i+1} = {correct/(i+1):.1%}  ({elapsed:.0f}s)")
+
+    elapsed = time.time() - t0
+    print("\n" + "=" * 65)
+    print(f"  [{label}] event_type accuracy : {correct}/{total} = {correct/total:.1%}")
+    print(f"  Elapsed : {elapsed:.0f}s")
+    print("=" * 65)
+
+    print("\n  By concurrency pattern:")
+    for pat, c in sorted(per_pattern.items()):
+        acc = c["correct"]/c["total"] if c["total"] else 0
+        print(f"    {pat:<20}  {c['correct']:3d}/{c['total']:3d} = {acc:.1%}")
+
+    print("\n  By nondeterminism level:")
+    for nd, c in sorted(per_nd.items()):
+        acc = c["correct"]/c["total"] if c["total"] else 0
+        print(f"    {nd:<10}  {c['correct']:3d}/{c['total']:3d} = {acc:.1%}")
+
+    return {
+        "model": args.model_id, "adapter": getattr(args, "adapter", None),
+        "label": label,
+        "total_examples": total, "correct": correct,
+        "accuracy": correct/total,
+        "elapsed_seconds": elapsed,
+        "by_pattern":       {k: v for k, v in per_pattern.items()},
+        "by_nondeterminism":{k: v for k, v in per_nd.items()},
+        "confusion":        {gt: dict(row) for gt, row in confusion.items()},
+        "per_example":      per_example,
+    }
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--adapter",    required=True)
+    parser.add_argument("--val_file",   required=True)
+    parser.add_argument("--model_id",   default="Qwen/Qwen3-8B")
+    parser.add_argument("--out_file",   default="eval_results.json")
+    parser.add_argument("--max_tokens", type=int, default=4096)
+    parser.add_argument("--load_in_4bit", action="store_true",
+                        help="Load base model in 4-bit (use on CUDA when VRAM < 16GB)")
+    parser.add_argument("--also_base",  action="store_true",
+                        help="Also eval base model (no adapter) before fine-tuned eval")
+    args = parser.parse_args()
+
+    device = get_device()
+    dtype = torch.bfloat16 if device.type == "mps" else torch.float16
+    print(f"Device: {device}  |  dtype: {dtype}  |  4-bit: {args.load_in_4bit}")
+    print(f"Loading base model: {args.model_id}")
+
+    tokenizer = AutoTokenizer.from_pretrained(args.model_id, trust_remote_code=True)
+    tokenizer.truncation_side = "left"
+
+    load_kwargs = dict(trust_remote_code=True)
+    if args.load_in_4bit and device.type == "cuda":
+        load_kwargs["quantization_config"] = BitsAndBytesConfig(
+            load_in_4bit=True,
+            bnb_4bit_quant_type="nf4",
+            bnb_4bit_compute_dtype=torch.bfloat16,
+            bnb_4bit_use_double_quant=True,
+        )
+        load_kwargs["device_map"] = "auto"
+    elif device.type == "cuda":
+        load_kwargs["torch_dtype"] = dtype
+        load_kwargs["device_map"] = "auto"
+    else:
+        load_kwargs["torch_dtype"] = dtype
+
+    base_model = AutoModelForCausalLM.from_pretrained(args.model_id, **load_kwargs)
+    if device.type not in ("cuda",):
+        base_model = base_model.to(device)
+
+    with open(args.val_file) as f:
+        examples = [json.loads(line) for line in f]
+
+    # ── Base model eval (no adapter) ──────────────────────────────────────────
+    if args.also_base:
+        base_model.eval()
+        base_results = evaluate(base_model, tokenizer, examples, device, args,
+                                label="base (no adapter)")
+        base_out = args.out_file.replace(".json", "_base.json")
+        with open(base_out, "w") as f:
+            json.dump(base_results, f, indent=2)
+        print(f"\n  Base results saved to: {base_out}")
+
+    # ── Fine-tuned eval (with adapter) ────────────────────────────────────────
+    print(f"\nLoading adapter: {args.adapter}")
+    model = PeftModel.from_pretrained(base_model, args.adapter)
+    model.eval()
+    print("Fine-tuned model ready.\n")
+
+    results = evaluate(model, tokenizer, examples, device, args, label="fine-tuned")
+    with open(args.out_file, "w") as f:
+        json.dump(results, f, indent=2)
+    print(f"\n  Fine-tuned results saved to: {args.out_file}")
+
+
+if __name__ == "__main__":
+    main()
