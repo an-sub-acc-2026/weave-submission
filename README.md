@@ -102,7 +102,12 @@ nondeterministic interleavings. GoKer programs are held out entirely from traini
 
 ## Models
 
-[Omitted for Double-Blind Review. The pre-trained adapters will be released publicly upon acceptance.]
+| Model | HuggingFace Adapter | Notes |
+|-------|---------------------|-------|
+| **Weave-CCWM 7B CE (Phase 13)** | [an-sub-acc-2026/weave-ccwm-qwen2.5-coder-7b-lora](https://huggingface.co/an-sub-acc-2026/weave-ccwm-qwen2.5-coder-7b-lora) | QLoRA on Qwen2.5-Coder-7B via Unsloth, **36.2% GoKer held-out** |
+| **Weave-CCWM 7B KL (Phase 14)** | [an-sub-acc-2026/weave-ccwm-qwen2.5-coder-7b-kl-lora](https://huggingface.co/an-sub-acc-2026/weave-ccwm-qwen2.5-coder-7b-kl-lora) | KL distribution loss, **35.8% GoKer held-out**, ECE 0.169 |
+| **Weave-CCWM 7B Traj (Phase 16)** | [an-sub-acc-2026/weave-ccwm-qwen2.5-coder-7b-traj-lora](https://huggingface.co/an-sub-acc-2026/weave-ccwm-qwen2.5-coder-7b-traj-lora) | Trajectory training, **40.1% GoKer held-out**, 10.48 mean survival steps |
+| **Weave-CCWM Qwen3-8B Traj (Phase 21)** | [an-sub-acc-2026/weave-ccwm-qwen3-8b-traj-lora](https://huggingface.co/an-sub-acc-2026/weave-ccwm-qwen3-8b-traj-lora) | Trajectory training on Qwen3-8B, **49.7%** val; GoUnblock 0%→11.4% |
 
 ---
 
@@ -111,8 +116,8 @@ nondeterministic interleavings. GoKer programs are held out entirely from traini
 ### Prerequisites
 
 ```bash
-git clone https://github.com/an-sub-acc-2026/weave
-cd weave
+git clone https://github.com/an-sub-acc-2026/weave-submission
+cd weave-submission
 go mod download          # Go 1.22+
 uv sync                  # Python deps via uv
 ```
